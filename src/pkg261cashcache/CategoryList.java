@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package pkg261cashcache;
-import 
+import java.util.ArrayList;
 
 /**
  *
@@ -12,7 +12,18 @@ import
  */
 public class CategoryList {
     
+    ArrayList<Category> theCategoryList;
     
+    public CategoryList(){
+        theCategoryList = new ArrayList();
+    }
     
+    public void setTheCategoryList(ArrayList<Category> aCategoryList){
+        theCategoryList = aCategoryList;
+    }
+    
+    public ArrayList<Category> getTheCategoryList(){
+        return theCategoryList;
+    }
     
 }
