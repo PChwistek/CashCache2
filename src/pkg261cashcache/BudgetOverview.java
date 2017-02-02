@@ -11,6 +11,8 @@ package pkg261cashcache;
  */
 public class BudgetOverview {
     
+    private Paycheck thePaycheck;
+    
     
     
     

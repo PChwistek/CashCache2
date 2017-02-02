@@ -16,6 +16,13 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class Paycheck {
     
     private DoubleProperty checkAmount;
+    //date and time variable
+    
+    public Paycheck(String date, double aCheckAmount){
+        
+        checkAmount = new SimpleDoubleProperty(aCheckAmount);
+        
+    }
     
     
     
