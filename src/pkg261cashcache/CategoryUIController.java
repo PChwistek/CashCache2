@@ -7,32 +7,21 @@ package pkg261cashcache;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author Phil
  */
-public class BudgetOverviewUIController implements Initializable {
+public class CategoryUIController implements Initializable {
 
     /**
      * Initializes the controller class.
      */
-    @FXML 
-    private Button thePreferencesButton;
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
-        
+        // TODO
     }    
     
-    @FXML
-    private void handlePreferencesButton(){
-        
-    }
 }
