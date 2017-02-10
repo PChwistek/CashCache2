@@ -8,8 +8,10 @@ package pkg261cashcache;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 /**
  *
@@ -18,11 +20,11 @@ import javafx.beans.property.StringProperty;
 public class Category {
     
     private IntegerProperty idNum; // would this end up being static? 
-    private DoubleProperty allowance;
+    private double allowance;
     private StringProperty categoryTitle;
     
     public Category(double anAllowance, String aTitle){
-        allowance = new SimpleDoubleProperty(anAllowance);
+        allowance = anAllowance;
         categoryTitle = new SimpleStringProperty(aTitle);
     }
 
@@ -43,14 +45,15 @@ public class Category {
     /**
      * @return the allowance
      */
-    public DoubleProperty getAllowance() {
-        return allowance;
+    public ObservableValue<Double> getAllowanceProperty() {
+        ObservableValue allowanceProperty = new SimpleDoubleProperty(allowance);
+        return  allowanceProperty;
     }
 
     /**
      * @param allowance the allowance to set
      */
-    public void setAllowance(DoubleProperty allowance) {
+    public void setAllowance(double allowance) {
         this.allowance = allowance;
     }
 

@@ -29,13 +29,14 @@ public class BudgetOverviewUIController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML 
-    private Button thePreferencesButton;
-    @FXML
-    private AnchorPane categoryListPanel;
+    @FXML private Button thePreferencesButton;
+    @FXML private AnchorPane categoryListUI;
+    @FXML private CategoryUIController categoryListUIController;
     
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
+    
+    
     
     public BudgetOverviewUIController(){
         
@@ -44,7 +45,6 @@ public class BudgetOverviewUIController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
     }    
     
     @FXML

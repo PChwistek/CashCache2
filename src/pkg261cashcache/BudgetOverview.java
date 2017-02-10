@@ -5,7 +5,7 @@
  */
 package pkg261cashcache;
 
-import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -15,7 +15,7 @@ public class BudgetOverview {
     
     private Paycheck thePaycheck;
     private CategoryList theCategoryList;
-    private ArrayList<Category> theListOfCategories;
+    private ObservableList<Category> theListOfCategories;
     
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
@@ -54,14 +54,14 @@ public class BudgetOverview {
     /**
      * @return the theListOfCategories
      */
-    public ArrayList<Category> getTheListOfCategories() {
+    public ObservableList<Category> getTheListOfCategories() {
         return theListOfCategories;
     }
 
     /**
      * @param theListOfCategories the theListOfCategories to set
      */
-    public void setTheListOfCategories(ArrayList<Category> theListOfCategories) {
+    public void setTheListOfCategories(ObservableList<Category> theListOfCategories) {
         this.theListOfCategories = theListOfCategories;
     }
     

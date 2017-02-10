@@ -5,6 +5,8 @@
  */
 package pkg261cashcache;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -12,18 +14,37 @@ import java.util.ArrayList;
  */
 public class CategoryList {
     
-    ArrayList<Category> theCategoryList;
+    private ObservableList <Category> theCategoryList = FXCollections.observableArrayList();
+
+    private Paycheck income;
     
     public CategoryList(){
-        theCategoryList = new ArrayList();
+        income = new Paycheck(5000);
+        populateDefaultCategoryList();
     }
     
-    public void setTheCategoryList(ArrayList<Category> aCategoryList){
+    public void setTheCategoryList(ObservableList<Category> aCategoryList){
         theCategoryList = aCategoryList;
     }
     
-    public ArrayList<Category> getTheCategoryList(){
+    public ObservableList<Category> getTheCategoryList(){
         return theCategoryList;
+    }
+    
+    public void populateDefaultCategoryList(){
+        
+        double fixedCostAllowance = income.getCheckAmount().doubleValue() * .5;
+        double savingsGoalAllowance = income.getCheckAmount().doubleValue() * .2;
+        double flexSpendingAllowance = income.getCheckAmount().doubleValue() * .3;
+        
+        Category fixedCosts = new Category(fixedCostAllowance, "Fixed Costs");
+        Category savingsGoals = new Category(savingsGoalAllowance, "Financial Goals");
+        Category flexSpending = new Category(flexSpendingAllowance, "Flexible Spending");
+        
+        theCategoryList.add(fixedCosts);
+        theCategoryList.add(savingsGoals);
+        theCategoryList.add(flexSpending);
+        
     }
     
 }

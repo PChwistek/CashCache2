@@ -24,6 +24,11 @@ public class Paycheck {
         checkAmount = new SimpleDoubleProperty(aCheckAmount);
         payDay = new Date(year, month, day);
     }
+    
+    public Paycheck(double aCheckAmount){
+        checkAmount = new SimpleDoubleProperty(aCheckAmount);
+        payDay = null;
+    }
 
     /**
      * @return the payDay
