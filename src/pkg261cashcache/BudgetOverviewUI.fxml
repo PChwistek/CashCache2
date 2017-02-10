@@ -20,7 +20,7 @@
                            <children>
                               <Button fx:id="preferencesButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#handlePreferencesButton" prefHeight="52.0" prefWidth="300.0" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children></AnchorPane>
-                      <AnchorPane fx:id="categoryListPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <fx:include source="CategoryUI.fxml"/>
                     </items>
                   </SplitPane>
                </children>

@@ -37,10 +37,13 @@ public class BudgetOverviewUIController implements Initializable {
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
     
+    public BudgetOverviewUIController(){
+        
+    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
         
     }    
     
@@ -51,17 +54,19 @@ public class BudgetOverviewUIController implements Initializable {
             secondaryStage = new Stage();
             root = FXMLLoader.load(getClass().getResource("UserPreferencesUI.fxml"));
             secondaryStage.setScene(new Scene(root));
-            secondaryStage.setTitle("About");
+            secondaryStage.setTitle("User Preferences");
             secondaryStage.initModality(Modality.APPLICATION_MODAL);
             secondaryStage.showAndWait();
             
         } catch (IOException e){
              e.printStackTrace();
-
         }
     }
     
     private void initCategoryListPanel(){
+        
+           
+       
         
     }
 }
