@@ -35,6 +35,7 @@ public class BudgetOverviewUIController implements Initializable {
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
+    private UserPreferencesUIController userPrefCntl;
     
     
     public BudgetOverviewUIController(){
@@ -51,10 +52,14 @@ public class BudgetOverviewUIController implements Initializable {
         try{
             Parent root;
             secondaryStage = new Stage();
-            root = FXMLLoader.load(getClass().getResource("UserPreferencesUI.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("UserPreferencesUI.fxml"));
+            root = loader.load();
             secondaryStage.setScene(new Scene(root));
             secondaryStage.setTitle("User Preferences");
             secondaryStage.initModality(Modality.APPLICATION_MODAL);
+            userPrefCntl = loader.getController();
+            userPrefCntl.setBudgetOverviewCntl(this);
             secondaryStage.showAndWait();
             
         } catch (IOException e){
@@ -62,8 +67,9 @@ public class BudgetOverviewUIController implements Initializable {
         }
     }
     
-    private void initCategoryListPanel(){
-            
+    public void closePreferences(){
+        secondaryStage.close();
     }
+    
     
 }

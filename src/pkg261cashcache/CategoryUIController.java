@@ -38,7 +38,6 @@ public class CategoryUIController implements Initializable {
     
     @FXML private Label fundsRemaining;
     
-    
     private CategoryList theCategoryList;
     private ObservableList theListOfCategories;
     
@@ -54,11 +53,7 @@ public class CategoryUIController implements Initializable {
         firstTableColumn.setCellValueFactory(cellData -> cellData.getValue().getCategoryTitle());
         secondTableColumn.setCellValueFactory(cellData -> cellData.getValue().getAllowanceProperty());
     }
-    
-    @FXML
-    public void initialize() {
-        
-    }    
+     
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -23,15 +23,27 @@ public class UserPreferencesUIController implements Initializable {
      */
     
     @FXML TextField incomeTextField;    
+    private BudgetOverviewUIController theBudgetOverviewCntl;
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }
-
-    public void handleIncomeTextField(double anIncome){
-        
-        
+    
+    public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
+        this.theBudgetOverviewCntl = aBudgetOverviewCntl;
     }
+    
+    @FXML
+    public void handleCancel(){
+        theBudgetOverviewCntl.closePreferences();
+    }
+    
+    @FXML
+    public void handleSave(){
+        theBudgetOverviewCntl.closePreferences();
+    }
+
+    
     
 }
