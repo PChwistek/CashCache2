@@ -26,15 +26,17 @@ public class UserPreferencesUIController implements Initializable {
     
     @FXML TextField incomeTextField;    
     private BudgetOverviewUIController theBudgetOverviewCntl;
-    private double monthlyIncome;
+    private double monthlyIncome = 0.0;
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         incomeTextField.setText("" + monthlyIncome);
+        
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
         this.theBudgetOverviewCntl = aBudgetOverviewCntl;
+        incomeTextField.setText("" + theBudgetOverviewCntl.getMonthlyIncome());
     }
     
     @FXML
@@ -45,7 +47,7 @@ public class UserPreferencesUIController implements Initializable {
     @FXML
     public void handleSave(){
         try{
-            monthlyIncome = Double.parseDouble(incomeTextField.getText());
+            theBudgetOverviewCntl.setMonthlyIncome(Double.parseDouble(incomeTextField.getText()));
             theBudgetOverviewCntl.updateCategoryUI();
             theBudgetOverviewCntl.closePreferences();
         } catch (Exception e){

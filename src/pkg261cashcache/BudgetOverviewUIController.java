@@ -36,10 +36,11 @@ public class BudgetOverviewUIController implements Initializable {
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
+    private double monthlyIncome;
     
     
     public BudgetOverviewUIController(){
-        
+        monthlyIncome = 0.0;
     }
     
     
@@ -68,7 +69,15 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public void updateCategoryUI(){
-        categoryListUIController.updateCategoryUI(userPrefCntl.getMonthlyIncome());
+        categoryListUIController.updateCategoryUI(this.getMonthlyIncome());
+    }
+    
+    public Double getMonthlyIncome(){
+        return monthlyIncome;
+    }
+    
+    public void setMonthlyIncome(Double anIncome){
+        monthlyIncome = anIncome;
     }
     
     public void closePreferences(){
