@@ -32,10 +32,9 @@ public class BudgetOverviewUIController implements Initializable {
     @FXML private Button thePreferencesButton;
     @FXML private AnchorPane categoryListUI;
     @FXML private CategoryUIController categoryListUIController;
-    
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
-    
+    private static BudgetOverview theBudgetOverview;
     
     
     public BudgetOverviewUIController(){
@@ -64,9 +63,7 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     private void initCategoryListPanel(){
-        
-           
-       
-        
+            
     }
+    
 }
