@@ -20,7 +20,7 @@ public class BudgetOverview {
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
         theCategoryList = aCategoryList;
-        theListOfCategories = aCategoryList.getTheCategoryList();     
+        theListOfCategories = aCategoryList.getTheListofCategories();     
     }
 
     /**
@@ -64,16 +64,4 @@ public class BudgetOverview {
     public void setTheListOfCategories(ObservableList<Category> theListOfCategories) {
         this.theListOfCategories = theListOfCategories;
     }
-    
-    
-    
-    
-    
-    
-    
-   
-    
-    
-    
-    
 }

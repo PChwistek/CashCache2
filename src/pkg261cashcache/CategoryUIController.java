@@ -42,8 +42,8 @@ public class CategoryUIController implements Initializable {
     private ObservableList theListOfCategories;
     
     public CategoryUIController(){
-        theCategoryList = new CategoryList();
-        theListOfCategories = theCategoryList.getTheCategoryList();
+        theCategoryList = new CategoryList(0.0);
+        theListOfCategories = theCategoryList.getTheListofCategories();
         
     }
     
@@ -57,11 +57,17 @@ public class CategoryUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        incomeAmount.setText("$5000");
+        incomeAmount.setText("$0");
         fundsRemaining.setText("$0");
         initCategoryTable();
-        categoryTable.setItems(theListOfCategories);
-        
     }
+    
+    public void updateCategoryUI(double anIncome){
+        incomeAmount.setText("$" + anIncome);
+        theCategoryList = new CategoryList(anIncome);
+        theListOfCategories = theCategoryList.getTheListofCategories();
+        categoryTable.setItems(theListOfCategories);
+    }
+    
     
 }

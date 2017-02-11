@@ -55,21 +55,26 @@ public class BudgetOverviewUIController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("UserPreferencesUI.fxml"));
             root = loader.load();
+            userPrefCntl = loader.getController();
+            userPrefCntl.setBudgetOverviewCntl(this);
             secondaryStage.setScene(new Scene(root));
             secondaryStage.setTitle("User Preferences");
             secondaryStage.initModality(Modality.APPLICATION_MODAL);
-            userPrefCntl = loader.getController();
-            userPrefCntl.setBudgetOverviewCntl(this);
-            secondaryStage.showAndWait();
+            secondaryStage.showAndWait(); 
             
         } catch (IOException e){
              e.printStackTrace();
         }
     }
     
+    public void updateCategoryUI(){
+        categoryListUIController.updateCategoryUI(userPrefCntl.getMonthlyIncome());
+    }
+    
     public void closePreferences(){
         secondaryStage.close();
     }
     
+
     
 }

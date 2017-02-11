@@ -18,8 +18,8 @@ public class CategoryList {
 
     private Paycheck income;
     
-    public CategoryList(){
-        income = new Paycheck(5000);
+    public CategoryList(Double anIncome){
+        income = new Paycheck(anIncome);
         populateDefaultCategoryList();
     }
     
@@ -27,7 +27,7 @@ public class CategoryList {
         theCategoryList = aCategoryList;
     }
     
-    public ObservableList<Category> getTheCategoryList(){
+    public ObservableList<Category> getTheListofCategories(){
         return theCategoryList;
     }
     
