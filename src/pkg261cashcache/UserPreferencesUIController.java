@@ -7,10 +7,14 @@ package pkg261cashcache;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
@@ -24,6 +28,11 @@ public class UserPreferencesUIController implements Initializable {
      * Initializes the controller class.
      */
     
+    ObservableList<String> paycheckFrequencyList = FXCollections.observableArrayList("Weekly", "Bi-weekly", "Monthly");
+    
+    @FXML
+    private ComboBox paycheckFrequency;
+    
     @FXML TextField incomeTextField;    
     private BudgetOverviewUIController theBudgetOverviewCntl;
     private double monthlyIncome = 0.0;
@@ -32,6 +41,8 @@ public class UserPreferencesUIController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         incomeTextField.setText("" + monthlyIncome);
         
+        paycheckFrequency.setValue("Bi-weekly");
+        paycheckFrequency.setItems(paycheckFrequencyList);
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
@@ -63,8 +74,5 @@ public class UserPreferencesUIController implements Initializable {
     public double getMonthlyIncome(){
         return monthlyIncome;
     }
-    
-
-    
     
 }
