@@ -36,18 +36,19 @@ public class UserPreferencesUIController implements Initializable {
     @FXML TextField incomeTextField;    
     private BudgetOverviewUIController theBudgetOverviewCntl;
     private double monthlyIncome = 0.0;
+    private int frequency = 0;
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         incomeTextField.setText("" + monthlyIncome);
-        
-        paycheckFrequency.setValue("Bi-weekly");
+        paycheckFrequency.setValue(paycheckFrequencyList.get(1));
         paycheckFrequency.setItems(paycheckFrequencyList);
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
         this.theBudgetOverviewCntl = aBudgetOverviewCntl;
         incomeTextField.setText("" + theBudgetOverviewCntl.getMonthlyIncome());
+        paycheckFrequency.setValue(paycheckFrequencyList.get(theBudgetOverviewCntl.getFrequency()));
     }
     
     @FXML
@@ -58,7 +59,15 @@ public class UserPreferencesUIController implements Initializable {
     @FXML
     public void handleSave(){
         try{
+            if(paycheckFrequency.getValue().equals(paycheckFrequencyList.get(0))){
+                frequency = 0;
+            } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(2))){
+                frequency = 2;
+            } else {
+                frequency = 1;
+            }
             theBudgetOverviewCntl.setMonthlyIncome(Double.parseDouble(incomeTextField.getText()));
+            theBudgetOverviewCntl.setFrequency(frequency);
             theBudgetOverviewCntl.updateCategoryUI();
             theBudgetOverviewCntl.closePreferences();
         } catch (Exception e){
@@ -66,7 +75,6 @@ public class UserPreferencesUIController implements Initializable {
             alert.setTitle("Incorrect Input");
             alert.setHeaderText("Income incorrectly inputted");
             alert.setContentText("Please input your income as a number");
-
             alert.showAndWait();
         }
     }
@@ -76,3 +84,4 @@ public class UserPreferencesUIController implements Initializable {
     }
     
 }
+

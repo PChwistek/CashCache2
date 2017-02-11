@@ -37,6 +37,7 @@ public class BudgetOverviewUIController implements Initializable {
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
     private double monthlyIncome;
+    private int frequency = 1; //index in frequencyList
     
     
     public BudgetOverviewUIController(){
@@ -69,7 +70,15 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public void updateCategoryUI(){
-        categoryListUIController.updateCategoryUI(this.getMonthlyIncome());
+        int aFrequency = 1;
+        if(frequency == 0){
+            aFrequency = 4;
+        } else if (frequency == 1){
+            aFrequency = 2;
+        } else {
+            aFrequency = 1;
+        }
+        categoryListUIController.updateCategoryUI(aFrequency * this.getMonthlyIncome());
     }
     
     public Double getMonthlyIncome(){
@@ -83,7 +92,22 @@ public class BudgetOverviewUIController implements Initializable {
     public void closePreferences(){
         secondaryStage.close();
     }
+
+    /**
+     * @return the frequency
+     */
+    public int getFrequency() {
+        return frequency;
+    }
+
+    /**
+     * @param frequency the frequency to set
+     */
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
     
 
     
 }
+
