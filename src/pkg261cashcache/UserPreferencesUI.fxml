@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg261cashcache.UserPreferencesUIController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg261cashcache.UserPreferencesUIController">
     <stylesheets>
         <URL value="@userpreferencesui.css" />
     </stylesheets>
@@ -26,7 +26,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="BOTTOM_LEFT" text="What is your monthly income?">
+            <Label alignment="BOTTOM_LEFT" text="How much is your paycheck?">
                <padding>
                   <Insets left="25.0" />
                </padding>
