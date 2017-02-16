@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.net.URL;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,21 +29,44 @@ public class UserPreferencesUIController implements Initializable {
      * Initializes the controller class.
      */
     
+    
+    
+    
     ObservableList<String> paycheckFrequencyList = FXCollections.observableArrayList("Weekly", "Bi-weekly", "Monthly");
+    
+    ObservableList<String> dobYearList = FXCollections.observableArrayList();
     
     @FXML
     private ComboBox paycheckFrequency;
+    
+    @FXML
+    private ComboBox dobYear;
     
     @FXML TextField incomeTextField;    
     private BudgetOverviewUIController theBudgetOverviewCntl;
     private double monthlyIncome = 0.0;
     private int frequency = 0;
         
+    public void findYear() {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int [] yearList = new int [year - 1900];
+        String [] yearStringList = new String [year - 1900];
+        
+        for (int i = 0; i < (year - 1900); i++) {
+            yearList[i] = year - i;
+            yearStringList[i] = yearList[i] + "";
+            dobYearList.add(yearStringList[i]);
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         incomeTextField.setText("" + monthlyIncome);
         paycheckFrequency.setValue(paycheckFrequencyList.get(1));
         paycheckFrequency.setItems(paycheckFrequencyList);
+        dobYear.setValue("Year");
+        findYear();
+        dobYear.setItems(dobYearList);
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
