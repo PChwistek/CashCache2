@@ -50,6 +50,7 @@ public class CategoryUIController implements Initializable {
     private void initCategoryTable(){
         firstTableColumn.setText("Category Name");
         secondTableColumn.setText("Allowance");
+        categoryTable.setPlaceholder(new Label("Create a category"));
         firstTableColumn.setCellValueFactory(cellData -> cellData.getValue().getCategoryTitle());
         secondTableColumn.setCellValueFactory(cellData -> cellData.getValue().getAllowanceProperty());
     }
