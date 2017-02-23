@@ -33,9 +33,9 @@ public class CategoryList {
     
     public void populateDefaultCategoryList(){
         
-        double fixedCostAllowance = income.getCheckAmount().doubleValue() * .5;
-        double savingsGoalAllowance = income.getCheckAmount().doubleValue() * .2;
-        double flexSpendingAllowance = income.getCheckAmount().doubleValue() * .3;
+        double fixedCostAllowance = income.getCheckAmount() * .5;
+        double savingsGoalAllowance = income.getCheckAmount() * .2;
+        double flexSpendingAllowance = income.getCheckAmount() * .3;
         
         Category fixedCosts = new Category(fixedCostAllowance, "Fixed Costs");
         Category savingsGoals = new Category(savingsGoalAllowance, "Financial Goals");

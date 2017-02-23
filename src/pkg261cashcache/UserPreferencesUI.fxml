@@ -61,7 +61,7 @@
             </Label>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <DatePicker layoutX="25.0" layoutY="1.0" prefHeight="27.0" prefWidth="168.0" />
+                  <DatePicker fx:id="dobPicker" layoutX="25.0" layoutY="1.0" prefHeight="27.0" prefWidth="168.0" />
                </children>
             </Pane>
             <Label text="What type of retirement account do you have?" GridPane.columnIndex="1" GridPane.rowIndex="3">

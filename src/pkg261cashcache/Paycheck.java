@@ -5,6 +5,7 @@
  */
 package pkg261cashcache;
 
+import java.util.Date;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -16,17 +17,18 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class Paycheck {
     
     private Date payDay;
-    private DoubleProperty checkAmount;
+    private double checkAmount;
+    private int frequency;
     //date and time variable
     
     public Paycheck(int year, int month, int day, double aCheckAmount){
         
-        checkAmount = new SimpleDoubleProperty(aCheckAmount);
+        checkAmount = aCheckAmount;
         payDay = new Date(year, month, day);
     }
     
     public Paycheck(double aCheckAmount){
-        checkAmount = new SimpleDoubleProperty(aCheckAmount);
+        checkAmount = aCheckAmount;
         payDay = null;
     }
 
@@ -47,18 +49,23 @@ public class Paycheck {
     /**
      * @return the checkAmount
      */
-    public DoubleProperty getCheckAmount() {
+    public double getCheckAmount() {
         return checkAmount;
     }
 
     /**
      * @param checkAmount the checkAmount to set
      */
-    public void setCheckAmount(DoubleProperty checkAmount) {
+    public void setCheckAmount(Double checkAmount) {
         this.checkAmount = checkAmount;
     }
     
+    public void setFrequency(int freq) {
+        this.frequency = freq;
+    }
     
-    
+    public int getFrequency() {
+        return frequency;
+    }
     
 }

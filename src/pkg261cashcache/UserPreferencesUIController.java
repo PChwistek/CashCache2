@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.net.URL;
+import static java.sql.Date.valueOf;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -30,9 +31,7 @@ public class UserPreferencesUIController implements Initializable {
      * Initializes the controller class.
      */
     
-    
-    
-    
+        
     ObservableList<String> paycheckFrequencyList = FXCollections.observableArrayList("Weekly", "Bi-weekly", "Monthly");
     
     //ObservableList<String> dobYearList = FXCollections.observableArrayList();
@@ -42,18 +41,18 @@ public class UserPreferencesUIController implements Initializable {
     @FXML
     private ComboBox paycheckFrequency;
     
-    /*@FXML
-    private ComboBox dobYear;
-    */
-    
     @FXML
     private ComboBox retirementType;
+    
+    @FXML
+    private DatePicker dobPicker;
     
     @FXML TextField incomeTextField;    
     private BudgetOverviewUIController theBudgetOverviewCntl;
     private Paycheck paycheck;
     private double monthlyIncome = 0.0;
     private int frequency = 0;
+    private String savingsType;
         
     /*public void findYear() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -102,10 +101,25 @@ public class UserPreferencesUIController implements Initializable {
             } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(1))){
                 frequency = 1;
             }
-            //paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
             
+            if (retirementType.getValue().equals(retirementTypeList.get(0))){
+                savingsType = "401(k)";
+            } else if (retirementType.getValue().equals(retirementTypeList.get(1))){
+                savingsType = "403(b)";
+            } else if (retirementType.getValue().equals(retirementTypeList.get(2))){
+                savingsType = "IRA";
+            } else if (retirementType.getValue().equals(retirementTypeList.get(3))){
+                savingsType = "Roth IRA";
+            } else if (retirementType.getValue().equals(retirementTypeList.get(4))){
+                savingsType = "Solo 401(k)";
+            }
+            
+            paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
+            paycheck.setFrequency(frequency);
             theBudgetOverviewCntl.setMonthlyIncome(Double.parseDouble(incomeTextField.getText()));
             theBudgetOverviewCntl.setFrequency(frequency);
+            theBudgetOverviewCntl.setDOB(valueOf(dobPicker.getValue()));
+            theBudgetOverviewCntl.setSavingsType(savingsType);
             theBudgetOverviewCntl.updateCategoryUI();
             theBudgetOverviewCntl.closePreferences();
         } catch (Exception e){

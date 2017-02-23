@@ -7,6 +7,7 @@ package pkg261cashcache;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +40,8 @@ public class BudgetOverviewUIController implements Initializable {
     private UserPreferencesUIController userPrefCntl;
     private double monthlyIncome;
     private int frequency = 1; //index in frequencyList
+    private Date dayOfBirth;
+    private String savingsType;
     
     
     public BudgetOverviewUIController(){
@@ -107,6 +110,22 @@ public class BudgetOverviewUIController implements Initializable {
      */
     public void setFrequency(int frequency) {
         this.frequency = frequency;
+    }
+    
+    public void setDOB(Date dob) {
+        this.dayOfBirth = dob;
+    }
+    
+    public Date getDOB() {
+        return dayOfBirth;
+    }
+    
+    public void setSavingsType(String savingsType) {
+        this.savingsType = savingsType;
+    }
+    
+    public String getSavingsType() {
+        return savingsType;
     }
     
     public void setCreateNewCategoryUI(){
