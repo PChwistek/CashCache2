@@ -54,15 +54,14 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </ComboBox>
-            <Label text="When were you born?" GridPane.rowIndex="3">
+            <Label text="When were you born? (MM/DD/YYYY)" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <ComboBox fx:id="dobYear" layoutX="25.0" layoutY="1.0" prefHeight="27.0" prefWidth="90.0" />
-                  <DatePicker layoutX="115.0" layoutY="1.0" prefHeight="27.0" prefWidth="168.0" />
+                  <DatePicker layoutX="25.0" layoutY="1.0" prefHeight="27.0" prefWidth="168.0" />
                </children>
             </Pane>
             <Label text="What type of retirement account do you have?" GridPane.columnIndex="1" GridPane.rowIndex="3">

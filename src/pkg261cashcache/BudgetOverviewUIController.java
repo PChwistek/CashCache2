@@ -34,7 +34,7 @@ public class BudgetOverviewUIController implements Initializable {
     @FXML private CategoryUIController categoryListUIController;
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
-    private static BudgetOverview theBudgetOverview;
+    //private static BudgetOverviewModel theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
     private double monthlyIncome;
     private int frequency = 1; //index in frequencyList

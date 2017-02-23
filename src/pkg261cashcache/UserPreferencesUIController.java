@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -14,8 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 /**
@@ -34,20 +35,27 @@ public class UserPreferencesUIController implements Initializable {
     
     ObservableList<String> paycheckFrequencyList = FXCollections.observableArrayList("Weekly", "Bi-weekly", "Monthly");
     
-    ObservableList<String> dobYearList = FXCollections.observableArrayList();
+    //ObservableList<String> dobYearList = FXCollections.observableArrayList();
+    
+    ObservableList<String> retirementTypeList = FXCollections.observableArrayList("401(k)", "403(b)", "IRA", "Roth IRA", "Solo 401(k)");
     
     @FXML
     private ComboBox paycheckFrequency;
     
-    @FXML
+    /*@FXML
     private ComboBox dobYear;
+    */
+    
+    @FXML
+    private ComboBox retirementType;
     
     @FXML TextField incomeTextField;    
     private BudgetOverviewUIController theBudgetOverviewCntl;
+    private Paycheck paycheck;
     private double monthlyIncome = 0.0;
     private int frequency = 0;
         
-    public void findYear() {
+    /*public void findYear() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int [] yearList = new int [year - 1900];
         String [] yearStringList = new String [year - 1900];
@@ -57,16 +65,20 @@ public class UserPreferencesUIController implements Initializable {
             yearStringList[i] = yearList[i] + "";
             dobYearList.add(yearStringList[i]);
         }
-    }
+    }*/
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         incomeTextField.setText("" + monthlyIncome);
         paycheckFrequency.setValue(paycheckFrequencyList.get(1));
         paycheckFrequency.setItems(paycheckFrequencyList);
-        dobYear.setValue("Year");
+        /*dobYear.setValue("Year");
         findYear();
         dobYear.setItems(dobYearList);
+        */
+        retirementType.setValue("Account Type");
+        retirementType.setItems(retirementTypeList);
+        
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
@@ -83,13 +95,15 @@ public class UserPreferencesUIController implements Initializable {
     @FXML
     public void handleSave(){
         try{
-            if(paycheckFrequency.getValue().equals(paycheckFrequencyList.get(0))){
+            if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(0))){
                 frequency = 0;
             } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(2))){
                 frequency = 2;
-            } else {
+            } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(1))){
                 frequency = 1;
             }
+            //paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
+            
             theBudgetOverviewCntl.setMonthlyIncome(Double.parseDouble(incomeTextField.getText()));
             theBudgetOverviewCntl.setFrequency(frequency);
             theBudgetOverviewCntl.updateCategoryUI();
