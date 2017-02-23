@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,29 +23,32 @@ import javafx.scene.control.TableView;
  *
  * @author Phil
  */
-public class CategoryUIController implements Initializable {
+public class CategoryListUIController implements Initializable {
 
     /**
      * Initializes the controller class.
      */
     
     @FXML private TableView<Category> categoryTable;
-    
     @FXML private TableColumn<Category, String> firstTableColumn;
-    
     @FXML private TableColumn<Category, Double> secondTableColumn;
-    
     @FXML private Label incomeAmount;
-    
     @FXML private Label fundsRemaining;
+    @FXML private Button addCategoryButton;
     
+    
+    private BudgetOverviewUIController theBudgetOverviewUICntl;
     private CategoryList theCategoryList;
     private ObservableList theListOfCategories;
     
-    public CategoryUIController(){
+    public CategoryListUIController(){
         theCategoryList = new CategoryList(0.0);
         theListOfCategories = theCategoryList.getTheListofCategories();
         
+    }
+    
+    public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
+        this.theBudgetOverviewUICntl = aBudgetOverviewCntl;
     }
     
     private void initCategoryTable(){
@@ -61,6 +65,9 @@ public class CategoryUIController implements Initializable {
         incomeAmount.setText("$0");
         fundsRemaining.setText("$0");
         initCategoryTable();
+        
+        categoryTable.getSelectionModel().selectedItemProperty().addListener(
+            (observable, oldValue, newValue) -> showCategoryDetails(newValue));
     }
     
     public void updateCategoryUI(double anIncome){
@@ -70,5 +77,12 @@ public class CategoryUIController implements Initializable {
         categoryTable.setItems(theListOfCategories);
     }
     
+    public void createNewCategory(){
+        theBudgetOverviewUICntl.setCreateNewCategoryUI();
+    }
+    
+    public void showCategoryDetails(Category cat){
+        theBudgetOverviewUICntl.setDetailViewCategoryUI();
+    }
     
 }
