@@ -31,6 +31,7 @@ public class BudgetOverviewUIController implements Initializable {
      */
     @FXML private Button thePreferencesButton;
     @FXML private AnchorPane categoryListUI;
+    @FXML private AnchorPane categoryDetailUIPanel;
     @FXML private CategoryListUIController categoryListUIController;
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
@@ -47,6 +48,7 @@ public class BudgetOverviewUIController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        categoryListUIController.setBudgetOverviewCntl(this);
     }    
     
     @FXML
@@ -107,7 +109,25 @@ public class BudgetOverviewUIController implements Initializable {
         this.frequency = frequency;
     }
     
+    public void setCreateNewCategoryUI(){
+        try{      
+            categoryDetailUIPanel.getChildren().clear();
+            categoryDetailUIPanel.getChildren().add(FXMLLoader.load(getClass().getResource("CreateCategoryUI.fxml")));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     
+    public void setDetailViewCategoryUI(){
+        try{
+            categoryDetailUIPanel.getChildren().clear();
+            categoryDetailUIPanel.getChildren().add(FXMLLoader.load(getClass().getResource("CategoryDetailUI.fxml")));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+
     
 }
-
