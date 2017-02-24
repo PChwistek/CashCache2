@@ -38,17 +38,14 @@ public class BudgetOverviewUIController implements Initializable {
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
-    private double monthlyIncome;
-    private int frequency = 1; //index in frequencyList
-    private Date dayOfBirth;
-    private String savingsType;
-    
+
+
     
     public BudgetOverviewUIController(){
-        monthlyIncome = 0.0;
+        theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(0));
+        theBudgetOverview.getThePaycheck().setFrequency(1);
     }
-    
-    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         categoryListUIController.setBudgetOverviewCntl(this);
@@ -76,9 +73,9 @@ public class BudgetOverviewUIController implements Initializable {
     
     public void updateCategoryUI(){
         int aFrequency = 1;
-        if(frequency == 0){
+        if(theBudgetOverview.getThePaycheck().getFrequency() == 0){
             aFrequency = 4;
-        } else if (frequency == 1){
+        } else if (theBudgetOverview.getThePaycheck().getFrequency() == 1){
             aFrequency = 2;
         } else {
             aFrequency = 1;
@@ -87,46 +84,26 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public Double getMonthlyIncome(){
-        return monthlyIncome;
+        return theBudgetOverview.getThePaycheck().getCheckAmount();
+    }
+    
+    public BudgetOverview getTheBudgetOverview(){
+        return theBudgetOverview;
     }
     
     public void setMonthlyIncome(Double anIncome){
-        monthlyIncome = anIncome;
+        theBudgetOverview.getThePaycheck().setCheckAmount(anIncome);
     }
     
     public void closePreferences(){
         secondaryStage.close();
     }
 
-    /**
-     * @return the frequency
-     */
-    public int getFrequency() {
-        return frequency;
+
+    public void setBudgetOverview(BudgetOverview aBudgetOverview){
+        this.theBudgetOverview = aBudgetOverview;
     }
 
-    /**
-     * @param frequency the frequency to set
-     */
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
-    }
-    
-    public void setDOB(Date dob) {
-        this.dayOfBirth = dob;
-    }
-    
-    public Date getDOB() {
-        return dayOfBirth;
-    }
-    
-    public void setSavingsType(String savingsType) {
-        this.savingsType = savingsType;
-    }
-    
-    public String getSavingsType() {
-        return savingsType;
-    }
     
     public void setCreateNewCategoryUI(){
         try{      
@@ -145,8 +122,5 @@ public class BudgetOverviewUIController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    
-
     
 }

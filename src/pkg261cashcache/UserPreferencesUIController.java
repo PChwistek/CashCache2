@@ -7,7 +7,6 @@ package pkg261cashcache;
 
 import java.net.URL;
 import static java.sql.Date.valueOf;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -38,18 +37,14 @@ public class UserPreferencesUIController implements Initializable {
     
     ObservableList<String> retirementTypeList = FXCollections.observableArrayList("401(k)", "403(b)", "IRA", "Roth IRA", "Solo 401(k)");
     
-    @FXML
-    private ComboBox paycheckFrequency;
-    
-    @FXML
-    private ComboBox retirementType;
-    
-    @FXML
-    private DatePicker dobPicker;
-    
+    @FXML private ComboBox paycheckFrequency;
+    @FXML private ComboBox retirementType;
+    @FXML private DatePicker dobPicker;
     @FXML TextField incomeTextField;    
+    
     private BudgetOverviewUIController theBudgetOverviewCntl;
     private Paycheck paycheck;
+    private BudgetOverview theBudgetOverview;
     private double monthlyIncome = 0.0;
     private int frequency = 0;
     private String savingsType;
@@ -77,13 +72,18 @@ public class UserPreferencesUIController implements Initializable {
         */
         retirementType.setValue("Account Type");
         retirementType.setItems(retirementTypeList);
+        paycheck = new Paycheck(0);
         
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
         this.theBudgetOverviewCntl = aBudgetOverviewCntl;
-        incomeTextField.setText("" + theBudgetOverviewCntl.getMonthlyIncome());
-        paycheckFrequency.setValue(paycheckFrequencyList.get(theBudgetOverviewCntl.getFrequency()));
+        this.theBudgetOverview = theBudgetOverviewCntl.getTheBudgetOverview();
+        this.paycheck = theBudgetOverview.getThePaycheck();
+        incomeTextField.setText("" + paycheck.getCheckAmount());
+        paycheckFrequency.setValue(paycheckFrequencyList.get(theBudgetOverview.getThePaycheck().getFrequency()));
+        dobPicker.setValue(theBudgetOverview.getDOB());
+        retirementType.setValue(theBudgetOverview.getAccountType());
     }
     
     @FXML
@@ -116,13 +116,15 @@ public class UserPreferencesUIController implements Initializable {
             
             paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
             paycheck.setFrequency(frequency);
-            theBudgetOverviewCntl.setMonthlyIncome(Double.parseDouble(incomeTextField.getText()));
-            theBudgetOverviewCntl.setFrequency(frequency);
-            theBudgetOverviewCntl.setDOB(valueOf(dobPicker.getValue()));
-            theBudgetOverviewCntl.setSavingsType(savingsType);
+            theBudgetOverview.setThePaycheck(paycheck);
+            theBudgetOverview.setDOB(dobPicker.getValue());
+            theBudgetOverview.setAccountType(savingsType);
+            theBudgetOverviewCntl.setBudgetOverview(theBudgetOverview);
             theBudgetOverviewCntl.updateCategoryUI();
             theBudgetOverviewCntl.closePreferences();
+            
         } catch (Exception e){
+            e.printStackTrace();
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Incorrect Input");
             alert.setHeaderText("Income incorrectly inputted");

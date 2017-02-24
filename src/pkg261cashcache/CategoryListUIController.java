@@ -78,6 +78,7 @@ public class CategoryListUIController implements Initializable {
     }
     
     public void createNewCategory(){
+        categoryTable.getSelectionModel().clearSelection();
         theBudgetOverviewUICntl.setCreateNewCategoryUI();
     }
     

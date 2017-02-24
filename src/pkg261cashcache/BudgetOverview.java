@@ -5,6 +5,7 @@
  */
 package pkg261cashcache;
 
+import java.time.LocalDate;
 import javafx.collections.ObservableList;
 
 /**
@@ -15,7 +16,9 @@ public class BudgetOverview {
     
     private Paycheck thePaycheck;
     private CategoryList theCategoryList;
+    private LocalDate theDate;
     private ObservableList<Category> theListOfCategories;
+    private String theSavingsAccountType; 
     
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
@@ -63,5 +66,21 @@ public class BudgetOverview {
      */
     public void setTheListOfCategories(ObservableList<Category> theListOfCategories) {
         this.theListOfCategories = theListOfCategories;
+    }
+    
+    public void setDOB(LocalDate aDate){
+        this.theDate = aDate;
+    }
+    
+    public LocalDate getDOB(){
+        return this.theDate;
+    }
+    
+    public void setAccountType(String anAccountType){
+        theSavingsAccountType = anAccountType;
+    }
+    
+    public String getAccountType(){
+        return this.theSavingsAccountType;
     }
 }
