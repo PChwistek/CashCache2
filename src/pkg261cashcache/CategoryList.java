@@ -36,13 +36,16 @@ public class CategoryList {
         double savingsGoalAllowance = getIncome().getCheckAmount() * .2;
         double flexSpendingAllowance = getIncome().getCheckAmount() * .3;
         
+        /*
         Category fixedCosts = new Category(fixedCostAllowance, "Fixed Costs");
         Category savingsGoals = new Category(savingsGoalAllowance, "Financial Goals");
         Category flexSpending = new Category(flexSpendingAllowance, "Flexible Spending");
         
+        
         getTheCategoryList().add(fixedCosts);
         getTheCategoryList().add(savingsGoals);
         getTheCategoryList().add(flexSpending);
+        */
         
     }
 

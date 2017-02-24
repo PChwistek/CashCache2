@@ -34,6 +34,8 @@ public class BudgetOverviewUIController implements Initializable {
     @FXML private AnchorPane categoryListUI;
     @FXML private AnchorPane categoryDetailUIPanel;
     @FXML private CategoryListUIController categoryListUIController;
+    private CreateCategoryUIController createCatCntl;
+    private CategoryDetailUIController catDetailCntl;
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
@@ -104,20 +106,41 @@ public class BudgetOverviewUIController implements Initializable {
         this.theBudgetOverview = aBudgetOverview;
     }
 
-    
+    //RIGHT PANEL CODE ===============================================================================================================//
     public void setCreateNewCategoryUI(){
         try{      
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("CreateCategoryUI.fxml"));
             categoryDetailUIPanel.getChildren().clear();
-            categoryDetailUIPanel.getChildren().add(FXMLLoader.load(getClass().getResource("CreateCategoryUI.fxml")));
+            categoryDetailUIPanel.getChildren().add(loader.load());
+            createCatCntl = loader.getController();
+            createCatCntl.setBudgetOverviewCntl(this);
         } catch (IOException e){
             e.printStackTrace();
         }
     }
     
+    public void createCategory(Category aCategory){
+        theBudgetOverview.getTheListOfCategories().add(aCategory);
+        updateCategoryUI();
+        closeRightPanel();
+    }
+    
+    public void closeRightPanel(){
+        categoryDetailUIPanel.getChildren().clear();
+    }
+    
     public void setDetailViewCategoryUI(){
         try{
+            
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("CategoryDetailUI.fxml"));
             categoryDetailUIPanel.getChildren().clear();
-            categoryDetailUIPanel.getChildren().add(FXMLLoader.load(getClass().getResource("CategoryDetailUI.fxml")));
+            categoryDetailUIPanel.getChildren().add(loader.load());
+            catDetailCntl = loader.getController();            
+            catDetailCntl.setBudgetOverviewCntl(this);
+
+            
         } catch (IOException e){
             e.printStackTrace();
         }

@@ -22,10 +22,12 @@ public class Category {
     private IntegerProperty idNum; // would this end up being static? 
     private double allowance;
     private StringProperty categoryTitle;
+    private String categoryType;
     
-    public Category(double anAllowance, String aTitle){
+    public Category(double anAllowance, String aTitle, String aCategoryType){
         allowance = anAllowance;
         categoryTitle = new SimpleStringProperty(aTitle);
+        categoryType = aCategoryType;
     }
 
     /**
@@ -69,6 +71,20 @@ public class Category {
      */
     public void setCategoryTitle(StringProperty categoryTitle) {
         this.categoryTitle = categoryTitle;
+    }
+
+    /**
+     * @return the categoryType
+     */
+    public String getCategoryType() {
+        return categoryType;
+    }
+
+    /**
+     * @param categoryType the categoryType to set
+     */
+    public void setCategoryType(String categoryType) {
+        this.categoryType = categoryType;
     }
     
 }

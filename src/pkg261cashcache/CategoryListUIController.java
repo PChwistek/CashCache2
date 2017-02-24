@@ -62,9 +62,11 @@ public class CategoryListUIController implements Initializable {
         incomeAmount.setText("$0");
         fundsRemaining.setText("$0");
         initCategoryTable();
+
+
+        categoryTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCategoryDetails(newValue));
         
-        categoryTable.getSelectionModel().selectedItemProperty().addListener(
-            (observable, oldValue, newValue) -> showCategoryDetails(newValue));
+      
     }
     
     public void updateCategoryUI(double anIncome){
