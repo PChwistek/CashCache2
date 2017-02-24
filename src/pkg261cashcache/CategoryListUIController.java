@@ -36,15 +36,12 @@ public class CategoryListUIController implements Initializable {
     @FXML private Label fundsRemaining;
     @FXML private Button addCategoryButton;
     
-    
     private BudgetOverviewUIController theBudgetOverviewUICntl;
+    private BudgetOverview theBudgetOverview;
     private CategoryList theCategoryList;
-    private ObservableList theListOfCategories;
+    private ObservableList<Category> theListOfCategories;
     
     public CategoryListUIController(){
-        theCategoryList = new CategoryList(0.0);
-        theListOfCategories = theCategoryList.getTheListofCategories();
-        
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
@@ -72,9 +69,20 @@ public class CategoryListUIController implements Initializable {
     
     public void updateCategoryUI(double anIncome){
         incomeAmount.setText("$" + anIncome);
-        theCategoryList = new CategoryList(anIncome);
+        this.theBudgetOverview = theBudgetOverviewUICntl.getTheBudgetOverview();
+        theCategoryList = theBudgetOverview.getTheCategoryList();
         theListOfCategories = theCategoryList.getTheListofCategories();
         categoryTable.setItems(theListOfCategories);
+        fundsRemaining.setText("" + (anIncome - calculateRemainingFunds()));
+        
+    }
+    
+    public double calculateRemainingFunds(){
+        double funds = 0;
+        for(int i = 0; i < theListOfCategories.size(); i++){
+            funds += theListOfCategories.get(i).getAllowanceProperty().getValue();
+        }
+        return funds;
     }
     
     public void createNewCategory(){

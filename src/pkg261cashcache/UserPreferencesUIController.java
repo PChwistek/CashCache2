@@ -127,8 +127,8 @@ public class UserPreferencesUIController implements Initializable {
             e.printStackTrace();
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Incorrect Input");
-            alert.setHeaderText("Income incorrectly inputted");
-            alert.setContentText("Please input your income as a number");
+            alert.setHeaderText("Please enter all fields");
+            alert.setContentText("Make sure to properly enter all your information");
             alert.showAndWait();
         }
     }

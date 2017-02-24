@@ -20,7 +20,6 @@ public class CategoryList {
     
     public CategoryList(Double anIncome){
         income = new Paycheck(anIncome);
-        populateDefaultCategoryList();
     }
     
     public void setTheCategoryList(ObservableList<Category> aCategoryList){
@@ -28,23 +27,45 @@ public class CategoryList {
     }
     
     public ObservableList<Category> getTheListofCategories(){
-        return theCategoryList;
+        return getTheCategoryList();
     }
     
     public void populateDefaultCategoryList(){
         
-        double fixedCostAllowance = income.getCheckAmount() * .5;
-        double savingsGoalAllowance = income.getCheckAmount() * .2;
-        double flexSpendingAllowance = income.getCheckAmount() * .3;
+        double fixedCostAllowance = getIncome().getCheckAmount() * .5;
+        double savingsGoalAllowance = getIncome().getCheckAmount() * .2;
+        double flexSpendingAllowance = getIncome().getCheckAmount() * .3;
         
         Category fixedCosts = new Category(fixedCostAllowance, "Fixed Costs");
         Category savingsGoals = new Category(savingsGoalAllowance, "Financial Goals");
         Category flexSpending = new Category(flexSpendingAllowance, "Flexible Spending");
         
-        theCategoryList.add(fixedCosts);
-        theCategoryList.add(savingsGoals);
-        theCategoryList.add(flexSpending);
+        getTheCategoryList().add(fixedCosts);
+        getTheCategoryList().add(savingsGoals);
+        getTheCategoryList().add(flexSpending);
         
     }
+
+    /**
+     * @return the theCategoryList
+     */
+    public ObservableList <Category> getTheCategoryList() {
+        return theCategoryList;
+    }
+
+    /**
+     * @return the income
+     */
+    public Paycheck getIncome() {
+        return income;
+    }
+
+    /**
+     * @param income the income to set
+     */
+    public void setIncome(Paycheck income) {
+        this.income = income;
+    }
+    
     
 }
