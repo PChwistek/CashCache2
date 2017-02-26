@@ -35,7 +35,7 @@ public class UserPreferencesUIController implements Initializable {
     
     //ObservableList<String> dobYearList = FXCollections.observableArrayList();
     
-    ObservableList<String> retirementTypeList = FXCollections.observableArrayList("401(k)", "403(b)", "IRA", "Roth IRA", "Solo 401(k)");
+    ObservableList<String> retirementTypeList = FXCollections.observableArrayList("401(k)", "403(b)", "IRA", "Roth IRA", "Solo 401(k)", "None");
     
     @FXML private ComboBox paycheckFrequency;
     @FXML private ComboBox retirementType;
@@ -112,6 +112,8 @@ public class UserPreferencesUIController implements Initializable {
                 savingsType = "Roth IRA";
             } else if (retirementType.getValue().equals(retirementTypeList.get(4))){
                 savingsType = "Solo 401(k)";
+            } else if (retirementType.getValue().equals(retirementTypeList.get(5))){
+                savingsType = "None";
             }
             
             paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
