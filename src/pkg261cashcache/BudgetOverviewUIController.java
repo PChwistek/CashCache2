@@ -42,9 +42,6 @@ public class BudgetOverviewUIController implements Initializable {
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
  
-
-
-    
     public BudgetOverviewUIController(){
         theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(0));
         theBudgetOverview.getThePaycheck().setFrequency(1);
@@ -115,18 +112,6 @@ public class BudgetOverviewUIController implements Initializable {
     public void setBudgetOverview(BudgetOverview aBudgetOverview){
         this.theBudgetOverview = aBudgetOverview;
     }
-    
-    public void deleteItem(Category cat){
-       ObservableList<Category> theList = theBudgetOverview.getTheListOfCategories();
-            int listSize = theList.size();
-            for(int i = 0; i < listSize ; i++){
-                if(theList.get(i).isEqual(cat)){
-                    theList.remove(i);
-                }
-            }
-            theBudgetOverview.setTheListOfCategories(theList);
-            updateCategoryUI();
-    }
 
     //RIGHT PANEL CODE ===============================================================================================================//
     public void setCreateNewCategoryUI(){
@@ -167,7 +152,19 @@ public class BudgetOverviewUIController implements Initializable {
             e.printStackTrace();
         }
     }
-
-   
+    
+    public void deleteItem(Category cat){
+        ObservableList<Category> theList = theBudgetOverview.getTheListOfCategories();
+        int listSize = theList.size();
+        for(int i = 0; i < listSize ; i++){
+            if(theList.get(i).isEqual(cat)){
+                theList.remove(i);
+            }
+        }
+        theBudgetOverview.setTheListOfCategories(theList);
+        updateCategoryUI();
+        categoryDetailUIPanel.getChildren().clear();
+    }
+    
     
 }

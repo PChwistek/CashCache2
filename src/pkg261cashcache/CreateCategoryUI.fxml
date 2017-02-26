@@ -18,7 +18,7 @@
          <top>
             <AnchorPane prefHeight="88.0" prefWidth="670.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="670.0" text="Create a new Expense Category">
+                  <Label fx:id="title" alignment="CENTER" prefHeight="17.0" prefWidth="670.0" text="Create a new Expense Category">
                      <font>
                         <Font size="24.0" />
                      </font>

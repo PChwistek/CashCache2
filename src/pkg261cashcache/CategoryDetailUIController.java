@@ -38,6 +38,7 @@ public class CategoryDetailUIController implements Initializable {
     @FXML private TextField theCategoryAllowance;
     @FXML private Slider allowanceSlider;
     @FXML private Button deleteButton;
+    @FXML private Button editButton;
     @FXML private PieChart recommended;
     @FXML private PieChart userAlloc;
     
@@ -97,12 +98,10 @@ public class CategoryDetailUIController implements Initializable {
     
     @FXML private void handleAllowanceTextField(){ // lots of defensive programming here
         try{
- 
             setAllowance();
             setUserAllocationChart();
             theBudgetOverviewCntl.updateCategoryUI();
             allowanceSlider.setValue(Double.parseDouble(theCategoryAllowance.getText()));
-
         } catch(Exception e){
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -173,11 +172,11 @@ public class CategoryDetailUIController implements Initializable {
         ButtonType cancelButton = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(okButton, cancelButton);
         Optional<ButtonType> result = alert.showAndWait();  
-        
         if(result.get() == okButton){
             theBudgetOverviewCntl.deleteItem(selectedCat);
         }
-
     }
+    
+
 
 }

@@ -9,6 +9,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -35,6 +38,7 @@ public class CreateCategoryUIController implements Initializable {
     @FXML private ComboBox categoryTypeDropDown;
     @FXML private ComboBox retirementBox;
     @FXML private Label retirement;
+    @FXML private Label title;
 
     ObservableList<String> categoryTypes = FXCollections.observableArrayList("Fixed Cost", "Flexible Spending", "Savings");
     ObservableList<String> retirementItems = FXCollections.observableArrayList("No", "Yes");
@@ -82,5 +86,6 @@ public class CreateCategoryUIController implements Initializable {
     private void handleCancelButton(){
         theBudgetOverviewCntl.closeRightPanel();
     }
+    
    
 }
