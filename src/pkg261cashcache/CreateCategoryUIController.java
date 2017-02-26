@@ -36,8 +36,8 @@ public class CreateCategoryUIController implements Initializable {
     @FXML private ComboBox retirementBox;
     @FXML private Label retirement;
 
-    ObservableList<String> categoryTypes = FXCollections.observableArrayList("Fixed Cost", "Savings Goal", "Flexible Spending");
-    ObservableList<String> retirementItems = FXCollections.observableArrayList("Yes", "No");
+    ObservableList<String> categoryTypes = FXCollections.observableArrayList("Fixed Cost", "Flexible Spending", "Savings");
+    ObservableList<String> retirementItems = FXCollections.observableArrayList("No", "Yes");
 
 
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
@@ -52,7 +52,7 @@ public class CreateCategoryUIController implements Initializable {
     
     @FXML
     private void handleCategoryTypeDrop(){
-        if(categoryTypeDropDown.getValue().equals(categoryTypes.get(1))){
+        if(categoryTypeDropDown.getValue().equals(categoryTypes.get(2))){
             retirementBox.setDisable(false); //starts out disabled
             retirement.setDisable(false);
         } else {

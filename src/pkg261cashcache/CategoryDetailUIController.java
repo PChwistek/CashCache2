@@ -7,9 +7,12 @@ package pkg261cashcache;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,14 +33,18 @@ public class CategoryDetailUIController implements Initializable {
     @FXML private Label theCategoryName;
     @FXML private Label theCategoryType;
     @FXML private TextField theCategoryAllowance;
-    @FXML private Button saveButton;
     @FXML private Slider allowanceSlider;
+    @FXML private PieChart recommended;
+    @FXML private PieChart userAlloc;
     
+    private ObservableList<Data> recommendedExpenseCat = FXCollections.observableArrayList();
+    private ObservableList<Data> userExpenseCat = FXCollections.observableArrayList();
     private BudgetOverviewUIController theBudgetOverviewCntl;
     private Category selectedCat;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+      
     }   
     
     public void setSelectedCategory(Category aCategory){
@@ -48,7 +55,8 @@ public class CategoryDetailUIController implements Initializable {
         allowanceSlider.setMin(0);
         allowanceSlider.setMax(theBudgetOverviewCntl.calculateRemainingFunds());
         allowanceSlider.setValue(selectedCat.getAllowanceProperty().getValue());
-        allowanceSlider.setMajorTickUnit(selectedCat.getAllowanceProperty().getValue());
+        setRecommendedChart();
+        setUserAllocationChart();
     }
     
     public void setAllowance(){
@@ -76,13 +84,11 @@ public class CategoryDetailUIController implements Initializable {
         this.theBudgetOverviewCntl = aBudgetOverviewCntl;
     }    
     
-    @FXML private void handleSave(){
-        setAllowance();
-        theBudgetOverviewCntl.updateCategoryUI();
-    }
-    
     @FXML private void handleSlider(){
         theCategoryAllowance.setText("" + Math.round(allowanceSlider.getValue()));
+        setAllowance();
+        theBudgetOverviewCntl.updateCategoryUI();
+        setUserAllocationChart();
     }
     
     @FXML private void handleAllowanceTextField(){ // lots of defensive programming here
@@ -96,6 +102,10 @@ public class CategoryDetailUIController implements Initializable {
                 allowanceSlider.setValue(allowanceSlider.getMax());
                 theCategoryAllowance.setText("" + allowanceSlider.getMax());
             }
+            setAllowance();
+            setUserAllocationChart();
+            theBudgetOverviewCntl.updateCategoryUI();
+
 
         } catch(Exception e){
             e.printStackTrace();
@@ -107,11 +117,54 @@ public class CategoryDetailUIController implements Initializable {
         }
     }
     
-    private void handleUserAllocationChart(){
+    private void setUserAllocationChart(){ //user chart data
+        ObservableList<Category> theListOfCategories = theBudgetOverviewCntl.getTheBudgetOverview().getTheListOfCategories();
+        double fixedCostAllowance = 0;
+        double flexSpendingAllowance = 0;
+        double savingsAllowance = 0;
+        if(userExpenseCat.size() == 0){
+            userExpenseCat.add(new Data("Fixed Costs", fixedCostAllowance));
+            userExpenseCat.add(new Data("Flexible Spending", flexSpendingAllowance));
+            userExpenseCat.add(new Data("Savings", savingsAllowance)); 
+            userExpenseCat.add(new Data("Unused Funds", theBudgetOverviewCntl.calculateRemainingFunds()));
+        }
+        double total = theBudgetOverviewCntl.getMonthlyIncome();
         
+        for(Category cat: theListOfCategories){
+            switch(cat.getCategoryType()){
+                case "Fixed Cost":
+                    fixedCostAllowance += cat.getAllowanceProperty().getValue();
+                    break;
+                case "Flexible Spending":
+                    flexSpendingAllowance += cat.getAllowanceProperty().getValue();
+                    break;
+                case "Savings":
+                    savingsAllowance += cat.getAllowanceProperty().getValue();
+                    break;
+                default:
+                    break;
+            }      
+        }
+        
+        fixedCostAllowance = fixedCostAllowance/total;
+        flexSpendingAllowance = flexSpendingAllowance/total;
+        savingsAllowance = savingsAllowance/total;
+               
+        
+        userExpenseCat.get(0).setPieValue(fixedCostAllowance);
+        userExpenseCat.get(1).setPieValue(flexSpendingAllowance);
+        userExpenseCat.get(2).setPieValue(savingsAllowance);
+        userExpenseCat.get(3).setPieValue(theBudgetOverviewCntl.calculateRemainingFunds()/total);
+        userAlloc.setData(userExpenseCat);
+        userAlloc.setLegendVisible(false);
+
     }
     
-    private void handleRecommendedChart(){
-        
+    private void setRecommendedChart(){ // rec chart data
+        recommendedExpenseCat.add(new Data("Fixed Costs", 50));
+        recommendedExpenseCat.add(new Data("Flexible Spending", 30));
+        recommendedExpenseCat.add(new Data("Savings", 20));
+        recommendedExpenseCat.add(new Data("Unused Funds", 0));
+        recommended.setData(recommendedExpenseCat);
     }
 }
