@@ -139,7 +139,6 @@ public class BudgetOverviewUIController implements Initializable {
     
     public void setDetailViewCategoryUI(Category aCat){
         try{
-            
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("CategoryDetailUI.fxml"));
             categoryDetailUIPanel.getChildren().clear();
