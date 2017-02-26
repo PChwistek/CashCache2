@@ -62,11 +62,7 @@ public class CategoryListUIController implements Initializable {
         incomeAmount.setText("$0");
         fundsRemaining.setText("$0");
         initCategoryTable();
-
-
         categoryTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCategoryDetails(newValue));
-        
-      
     }
     
     public void updateCategoryUI(double anIncome){
@@ -75,11 +71,13 @@ public class CategoryListUIController implements Initializable {
         theCategoryList = theBudgetOverview.getTheCategoryList();
         theListOfCategories = theCategoryList.getTheListofCategories();
         categoryTable.setItems(theListOfCategories);
-        fundsRemaining.setText("" + (anIncome - calculateRemainingFunds()));
+        fundsRemaining.setText("" + (anIncome - calculateCurrentTotalAllocations()));
+        categoryTable.refresh();
+        addCategoryButton.setDisable(false);
         
     }
     
-    public double calculateRemainingFunds(){
+    public double calculateCurrentTotalAllocations(){
         double funds = 0;
         for(int i = 0; i < theListOfCategories.size(); i++){
             funds += theListOfCategories.get(i).getAllowanceProperty().getValue();
@@ -92,8 +90,10 @@ public class CategoryListUIController implements Initializable {
         theBudgetOverviewUICntl.setCreateNewCategoryUI();
     }
     
-    public void showCategoryDetails(Category cat){
-        theBudgetOverviewUICntl.setDetailViewCategoryUI();
+    public void showCategoryDetails(Category aCat){
+        if(aCat != null){
+            theBudgetOverviewUICntl.setDetailViewCategoryUI(aCat);
+        }
     }
     
 }

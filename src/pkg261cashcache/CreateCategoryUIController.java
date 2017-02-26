@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -33,6 +34,8 @@ public class CreateCategoryUIController implements Initializable {
     @FXML private TextField categoryName;
     @FXML private ComboBox categoryTypeDropDown;
     @FXML private ComboBox retirementBox;
+    @FXML private Label retirement;
+
     ObservableList<String> categoryTypes = FXCollections.observableArrayList("Fixed Cost", "Savings Goal", "Flexible Spending");
     ObservableList<String> retirementItems = FXCollections.observableArrayList("Yes", "No");
 
@@ -51,6 +54,10 @@ public class CreateCategoryUIController implements Initializable {
     private void handleCategoryTypeDrop(){
         if(categoryTypeDropDown.getValue().equals(categoryTypes.get(1))){
             retirementBox.setDisable(false); //starts out disabled
+            retirement.setDisable(false);
+        } else {
+            retirementBox.setDisable(true); //starts out disabled
+            retirement.setDisable(true);
         }
     }
     

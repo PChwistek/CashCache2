@@ -19,7 +19,8 @@ import javafx.beans.value.ObservableValue;
  */
 public class Category {
     
-    private IntegerProperty idNum; // would this end up being static? 
+    private Integer idNum; // would this end up being static? 
+    private static int idCount = 1;
     private double allowance;
     private StringProperty categoryTitle;
     private String categoryType;
@@ -28,19 +29,21 @@ public class Category {
         allowance = anAllowance;
         categoryTitle = new SimpleStringProperty(aTitle);
         categoryType = aCategoryType;
+        idNum = idCount;
+        idCount++;
     }
 
     /**
      * @return the idNum
      */
-    public IntegerProperty getIdNum() {
+    public int getIdNum() {
         return idNum;
     }
 
     /**
      * @param idNum the idNum to set
      */
-    public void setIdNum(IntegerProperty idNum) {
+    public void setIdNum(int idNum) {
         this.idNum = idNum;
     }
 
@@ -87,4 +90,11 @@ public class Category {
         this.categoryType = categoryType;
     }
     
+    public boolean isEqual(Category aCat){
+        if(this.getIdNum() == aCat.getIdNum()){
+            return true;
+        } 
+        return false;
+    }
+        
 }

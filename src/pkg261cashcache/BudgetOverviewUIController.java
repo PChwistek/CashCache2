@@ -40,6 +40,7 @@ public class BudgetOverviewUIController implements Initializable {
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
+ 
 
 
     
@@ -74,6 +75,10 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public void updateCategoryUI(){
+        categoryListUIController.updateCategoryUI(this.getMonthlyIncome());
+    }
+    
+    public Double getMonthlyIncome(){
         int aFrequency = 1;
         if(theBudgetOverview.getThePaycheck().getFrequency() == 0){
             aFrequency = 4;
@@ -82,11 +87,7 @@ public class BudgetOverviewUIController implements Initializable {
         } else {
             aFrequency = 1;
         }
-        categoryListUIController.updateCategoryUI(aFrequency * this.getMonthlyIncome());
-    }
-    
-    public Double getMonthlyIncome(){
-        return theBudgetOverview.getThePaycheck().getCheckAmount();
+        return theBudgetOverview.getThePaycheck().getCheckAmount()* aFrequency;
     }
     
     public BudgetOverview getTheBudgetOverview(){
@@ -99,6 +100,14 @@ public class BudgetOverviewUIController implements Initializable {
     
     public void closePreferences(){
         secondaryStage.close();
+    }
+    
+    public double calculateRemainingFunds(){
+       double expenses = 0;
+        for(int i = 0; i < theBudgetOverview.getTheListOfCategories().size(); i++){
+            expenses += theBudgetOverview.getTheListOfCategories().get(i).getAllowanceProperty().getValue();
+        }
+        return getMonthlyIncome() - expenses;
     }
 
 
@@ -130,7 +139,7 @@ public class BudgetOverviewUIController implements Initializable {
         categoryDetailUIPanel.getChildren().clear();
     }
     
-    public void setDetailViewCategoryUI(){
+    public void setDetailViewCategoryUI(Category aCat){
         try{
             
             FXMLLoader loader = new FXMLLoader();
@@ -139,11 +148,13 @@ public class BudgetOverviewUIController implements Initializable {
             categoryDetailUIPanel.getChildren().add(loader.load());
             catDetailCntl = loader.getController();            
             catDetailCntl.setBudgetOverviewCntl(this);
-
+            catDetailCntl.setSelectedCategory(aCat);
             
         } catch (IOException e){
             e.printStackTrace();
         }
     }
+
+   
     
 }

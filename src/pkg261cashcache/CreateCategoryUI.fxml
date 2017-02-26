@@ -132,7 +132,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label disable="true" text="Retirement?">
+                              <Label fx:id="retirement" disable="true" text="Retirement?">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

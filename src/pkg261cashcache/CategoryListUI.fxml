@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="576.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg261cashcache.CategoryListUIController">
+<AnchorPane id="AnchorPane" prefHeight="576.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg261cashcache.CategoryListUIController">
    <children>
       <BorderPane layoutX="7.0" prefHeight="576.0" prefWidth="277.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <top>
@@ -35,7 +35,7 @@
                         </TableView>
                         <AnchorPane layoutX="15.0" layoutY="385.0" prefHeight="33.0">
                            <children>
-                              <Button fx:id="addCategoryButton" alignment="CENTER" layoutX="23.0" layoutY="-8.0" mnemonicParsing="false" onAction="#createNewCategory" prefHeight="33.0" prefWidth="248.0" text="Add Expense Category" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Button fx:id="addCategoryButton" alignment="CENTER" disable="true" layoutX="23.0" layoutY="-8.0" mnemonicParsing="false" onAction="#createNewCategory" prefHeight="33.0" prefWidth="248.0" text="Add Expense Category" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>
