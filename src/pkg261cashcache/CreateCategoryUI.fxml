@@ -46,12 +46,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="52.0" prefWidth="145.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefWidth="145.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                            <GridPane.margin>
                               <Insets right="15.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreate" prefHeight="52.0" prefWidth="145.0" text="Create" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreate" prefWidth="145.0" text="Create" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                            <GridPane.margin>
                               <Insets left="15.0" />
                            </GridPane.margin>

@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -34,6 +37,7 @@ public class CategoryDetailUIController implements Initializable {
     @FXML private Label theCategoryType;
     @FXML private TextField theCategoryAllowance;
     @FXML private Slider allowanceSlider;
+    @FXML private Button deleteButton;
     @FXML private PieChart recommended;
     @FXML private PieChart userAlloc;
     
@@ -87,25 +91,17 @@ public class CategoryDetailUIController implements Initializable {
     @FXML private void handleSlider(){
         theCategoryAllowance.setText("" + Math.round(allowanceSlider.getValue()));
         setAllowance();
-        theBudgetOverviewCntl.updateCategoryUI();
         setUserAllocationChart();
+        theBudgetOverviewCntl.updateCategoryUI();
     }
     
     @FXML private void handleAllowanceTextField(){ // lots of defensive programming here
         try{
-            if(Double.parseDouble(theCategoryAllowance.getText()) > 0 && Double.parseDouble(theCategoryAllowance.getText()) < allowanceSlider.getMax()){
-                allowanceSlider.setValue(Double.parseDouble(theCategoryAllowance.getText()));
-            } else if (Double.parseDouble(theCategoryAllowance.getText()) < 0){
-                allowanceSlider.setValue(0);
-                theCategoryAllowance.setText("" + 0);
-            } else if(Double.parseDouble(theCategoryAllowance.getText()) > allowanceSlider.getMax()){
-                allowanceSlider.setValue(allowanceSlider.getMax());
-                theCategoryAllowance.setText("" + allowanceSlider.getMax());
-            }
+ 
             setAllowance();
             setUserAllocationChart();
             theBudgetOverviewCntl.updateCategoryUI();
-
+            allowanceSlider.setValue(Double.parseDouble(theCategoryAllowance.getText()));
 
         } catch(Exception e){
             e.printStackTrace();
@@ -167,4 +163,21 @@ public class CategoryDetailUIController implements Initializable {
         recommendedExpenseCat.add(new Data("Unused Funds", 0));
         recommended.setData(recommendedExpenseCat);
     }
+    
+    @FXML private void handleDeleteButton(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete?");
+        alert.setHeaderText("Are you sure you want to delete this item?");
+        alert.setContentText("Once deleted, this data cannot be retrieved");
+        ButtonType okButton = new ButtonType("OK",  ButtonData.CANCEL_CLOSE);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okButton, cancelButton);
+        Optional<ButtonType> result = alert.showAndWait();  
+        
+        if(result.get() == okButton){
+            theBudgetOverviewCntl.deleteItem(selectedCat);
+        }
+
+    }
+
 }

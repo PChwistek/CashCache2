@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -113,6 +114,18 @@ public class BudgetOverviewUIController implements Initializable {
 
     public void setBudgetOverview(BudgetOverview aBudgetOverview){
         this.theBudgetOverview = aBudgetOverview;
+    }
+    
+    public void deleteItem(Category cat){
+       ObservableList<Category> theList = theBudgetOverview.getTheListOfCategories();
+            int listSize = theList.size();
+            for(int i = 0; i < listSize ; i++){
+                if(theList.get(i).isEqual(cat)){
+                    theList.remove(i);
+                }
+            }
+            theBudgetOverview.setTheListOfCategories(theList);
+            updateCategoryUI();
     }
 
     //RIGHT PANEL CODE ===============================================================================================================//

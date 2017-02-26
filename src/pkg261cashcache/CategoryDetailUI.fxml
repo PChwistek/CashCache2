@@ -76,7 +76,7 @@
                               </TextField>
                            </children>
                         </GridPane>
-                        <Slider fx:id="allowanceSlider" onMouseDragged="#handleSlider" onMouseExited="#handleSlider" onMouseMoved="#handleSlider" onMousePressed="#handleSlider" onMouseReleased="#handleSlider" onScroll="#handleSlider" onScrollFinished="#handleSlider" onScrollStarted="#handleSlider" GridPane.rowIndex="2">
+                        <Slider fx:id="allowanceSlider" onMouseClicked="#handleSlider" onMouseDragged="#handleSlider" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" />
                            </GridPane.margin>
@@ -128,7 +128,7 @@
                      <children>
                         <Button mnemonicParsing="false" prefWidth="100.0" text="Edit" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                         <Button mnemonicParsing="false" prefWidth="100.0" text="Log" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="Delete" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteButton" prefWidth="100.0" text="Delete" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                      </children>
                   </GridPane>
                </children>
