@@ -57,9 +57,25 @@ public class CategoryDetailUIController implements Initializable {
         theCategoryName.setText(selectedCat.getCategoryTitle().getValue());
         theCategoryType.setText(selectedCat.getCategoryType());
         theCategoryAllowance.setText("" + selectedCat.getAllowanceProperty().getValue());
+        
         allowanceSlider.setMin(0);
         allowanceSlider.setMax(theBudgetOverviewCntl.calculateRemainingFunds());
         allowanceSlider.setValue(selectedCat.getAllowanceProperty().getValue());
+       
+        if (theBudgetOverviewCntl.calculateRemainingFunds() == 0){
+            allowanceSlider.setMin(0);
+            allowanceSlider.setMax(selectedCat.getAllowanceProperty().getValue());
+            allowanceSlider.setValue(selectedCat.getAllowanceProperty().getValue());
+        } else if (theBudgetOverviewCntl.calculateRemainingFunds() > 0){
+            allowanceSlider.setMin(0);
+            allowanceSlider.setMax(selectedCat.getAllowanceProperty().getValue() + theBudgetOverviewCntl.calculateRemainingFunds());
+            allowanceSlider.setValue(selectedCat.getAllowanceProperty().getValue());
+        } else if (theBudgetOverviewCntl.calculateRemainingFunds() < 0) {
+        
+        }
+        
+ 
+        
         setRecommendedChart();
         setUserAllocationChart();
     }

@@ -102,6 +102,7 @@ public class UserPreferencesUIController implements Initializable {
                 frequency = 1;
             }
             
+            
             if (retirementType.getValue().equals(retirementTypeList.get(0))){
                 savingsType = "401(k)";
             } else if (retirementType.getValue().equals(retirementTypeList.get(1))){
@@ -123,6 +124,7 @@ public class UserPreferencesUIController implements Initializable {
             theBudgetOverview.setAccountType(savingsType);
             theBudgetOverviewCntl.setBudgetOverview(theBudgetOverview);
             theBudgetOverviewCntl.updateCategoryUI();
+            theBudgetOverviewCntl.closeRightPanel();
             theBudgetOverviewCntl.closePreferences();
             
         } catch (Exception e){

@@ -71,8 +71,8 @@ public class CategoryListUIController implements Initializable {
         theCategoryList = theBudgetOverview.getTheCategoryList();
         theListOfCategories = theCategoryList.getTheListofCategories();
         categoryTable.setItems(theListOfCategories);
-        fundsRemaining.setText("" + (anIncome - calculateCurrentTotalAllocations()));
-        categoryTable.refresh();
+        fundsRemaining.setText("$" + (anIncome - calculateCurrentTotalAllocations()));
+        categoryTable.refresh();   
         addCategoryButton.setDisable(false);
         
     }

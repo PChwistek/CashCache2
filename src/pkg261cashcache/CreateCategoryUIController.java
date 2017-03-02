@@ -68,7 +68,12 @@ public class CreateCategoryUIController implements Initializable {
     @FXML
     private void handleCreate(){
         try{
-            String name = categoryName.getText();
+            String name = null;
+            if(categoryName.getText().equals("") == false){
+                 name = categoryName.getText();
+            } else {
+                throw new Exception();
+            }
             String type = categoryTypeDropDown.getValue().toString();
             Category aCategory = new Category(0, name, type);
             theBudgetOverviewCntl.createCategory(aCategory);
