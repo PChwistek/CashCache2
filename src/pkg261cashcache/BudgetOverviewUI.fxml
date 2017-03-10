@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="1020.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg261cashcache.BudgetOverviewUIController">
     <stylesheets>
@@ -18,7 +21,19 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="159.0" prefWidth="301.0">
                            <children>
-                              <Button fx:id="preferencesButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#handlePreferencesButton" prefHeight="52.0" prefWidth="300.0" text="Preferences" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <GridPane prefHeight="52.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="preferencesButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePreferencesButton" prefHeight="35.0" prefWidth="125.0" text="Preferences" GridPane.halignment="CENTER" />
+                                    <Button disable="true" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Calendar" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                 </children>
+                              </GridPane>
                            </children></AnchorPane>
                       <fx:include fx:id="categoryListUI" source="CategoryListUI.fxml" />
                     </items>
