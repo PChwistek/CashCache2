@@ -105,6 +105,7 @@ public class UserPreferencesUIController implements Initializable {
             
             paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
             paycheck.setFrequency(frequency);
+            paycheck.nextPaycheck(lastCheckPicker.getValue(), frequency);
             theBudgetOverview.setThePaycheck(paycheck);
             theBudgetOverview.setDOB(dobPicker.getValue());
             theBudgetOverview.setLastPayDay(lastCheckPicker.getValue());
