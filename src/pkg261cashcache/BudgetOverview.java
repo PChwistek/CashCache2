@@ -82,5 +82,15 @@ public class BudgetOverview {
     
     public String getAccountType(){
         return this.theSavingsAccountType;
+        
     }
+    
+    public void setLastPayDay(LocalDate aDate){
+        this.theDate = aDate;
+    }
+    
+    public LocalDate getLastPayDay(){
+        return this.theDate;
+    }
+    
 }

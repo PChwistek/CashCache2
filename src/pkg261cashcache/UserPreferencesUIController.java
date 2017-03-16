@@ -40,6 +40,7 @@ public class UserPreferencesUIController implements Initializable {
     @FXML private ComboBox paycheckFrequency;
     @FXML private ComboBox retirementType;
     @FXML private DatePicker dobPicker;
+    @FXML private DatePicker lastCheckPicker;
     @FXML TextField incomeTextField;    
     
     private BudgetOverviewUIController theBudgetOverviewCntl;
@@ -49,27 +50,11 @@ public class UserPreferencesUIController implements Initializable {
     private int frequency = 0;
     private String savingsType;
         
-    /*public void findYear() {
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        int [] yearList = new int [year - 1900];
-        String [] yearStringList = new String [year - 1900];
-        
-        for (int i = 0; i < (year - 1900); i++) {
-            yearList[i] = year - i;
-            yearStringList[i] = yearList[i] + "";
-            dobYearList.add(yearStringList[i]);
-        }
-    }*/
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         incomeTextField.setText("" + monthlyIncome);
         paycheckFrequency.setValue(paycheckFrequencyList.get(1));
         paycheckFrequency.setItems(paycheckFrequencyList);
-        /*dobYear.setValue("Year");
-        findYear();
-        dobYear.setItems(dobYearList);
-        */
         retirementType.setValue("Account Type");
         retirementType.setItems(retirementTypeList);
         paycheck = new Paycheck(0);
@@ -83,6 +68,7 @@ public class UserPreferencesUIController implements Initializable {
         incomeTextField.setText("" + paycheck.getCheckAmount());
         paycheckFrequency.setValue(paycheckFrequencyList.get(theBudgetOverview.getThePaycheck().getFrequency()));
         dobPicker.setValue(theBudgetOverview.getDOB());
+        lastCheckPicker.setValue(theBudgetOverview.getLastPayDay());
         retirementType.setValue(theBudgetOverview.getAccountType());
     }
     
@@ -121,6 +107,7 @@ public class UserPreferencesUIController implements Initializable {
             paycheck.setFrequency(frequency);
             theBudgetOverview.setThePaycheck(paycheck);
             theBudgetOverview.setDOB(dobPicker.getValue());
+            theBudgetOverview.setLastPayDay(lastCheckPicker.getValue());
             theBudgetOverview.setAccountType(savingsType);
             theBudgetOverviewCntl.setBudgetOverview(theBudgetOverview);
             theBudgetOverviewCntl.updateCategoryUI();
