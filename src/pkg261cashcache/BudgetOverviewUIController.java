@@ -32,11 +32,13 @@ public class BudgetOverviewUIController implements Initializable {
      * Initializes the controller class.
      */
     @FXML private Button thePreferencesButton;
+    @FXML private Button theCalendarButton;
     @FXML private AnchorPane categoryListUI;
     @FXML private AnchorPane categoryDetailUIPanel;
     @FXML private CategoryListUIController categoryListUIController;
     private CreateCategoryUIController createCatCntl;
     private CategoryDetailUIController catDetailCntl;
+    private CalendarViewUIController calendarUICntl;
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
@@ -72,8 +74,25 @@ public class BudgetOverviewUIController implements Initializable {
         }
     }
     
+    @FXML 
+    private void handleCalendarButton(){
+        
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("CalendarViewUI.fxml"));
+            categoryDetailUIPanel.getChildren().clear();
+            categoryDetailUIPanel.getChildren().add(loader.load());
+            calendarUICntl = loader.getController();
+            calendarUICntl.setBudgetOverviewCntl(this);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
     public void updateCategoryUI(){
         categoryListUIController.updateCategoryUI(this.getMonthlyIncome());
+        theCalendarButton.setDisable(false);
+        
     }
     
     public Double getMonthlyIncome(){

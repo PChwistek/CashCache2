@@ -19,9 +19,15 @@ public class CalendarViewUIController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    private BudgetOverviewUIController theBudgetOverviewUICntl;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
+        this.theBudgetOverviewUICntl = aBudgetOverviewCntl;
+    }  
     
 }
