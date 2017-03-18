@@ -213,9 +213,9 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ProgressBar prefWidth="250.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <ProgressBar prefWidth="250.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <ProgressBar prefWidth="250.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <ProgressBar fx:id="savingsBar" prefWidth="250.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <ProgressBar fx:id="flexSpendBar" prefWidth="250.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <ProgressBar fx:id="fixedCostBar" prefWidth="250.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                               <Label text="Fixed Cost Spending Used:" GridPane.halignment="RIGHT">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
@@ -231,17 +231,17 @@
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="\% amount " GridPane.columnIndex="2">
+                              <Label fx:id="fixedCostPercentage" text="\% amount " GridPane.columnIndex="2">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="\% amount" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Label fx:id="flexSpenPercentage" text="\% amount" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="\% amount" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                              <Label fx:id="savingsPercentage" text="\% amount" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>

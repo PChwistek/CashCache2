@@ -20,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
@@ -65,6 +67,15 @@ public class CalendarViewUIController implements Initializable {
     @FXML private Button savingsButton;
     @FXML private Accordion theAccordian;
     
+    @FXML private ProgressBar fixedCostBar;
+    @FXML private ProgressBar flexSpendBar;
+    @FXML private ProgressBar savingsBar;
+    
+    @FXML private Label fixedCostPercentage;
+    @FXML private Label flexSpenPercentage;
+    @FXML private Label savingsPercentage;
+    
+    
     private Stage secondaryStage;
     private CreateNewExpenseController theExpenseCntl;
     private ArrayList<ExpenseEvent> fixedCostEvents = new ArrayList();
@@ -87,6 +98,7 @@ public class CalendarViewUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initCategoryTables();
+        
     }    
     
     @FXML
@@ -194,7 +206,64 @@ public class CalendarViewUIController implements Initializable {
 
            savingsRefinedList = FXCollections.observableArrayList(savingsEvents);
            savingsTable.setItems(savingsRefinedList);
+           initProgressBars();
+
         }
+    }
+    
+    public void initProgressBars(){
+        ObservableList<Category> theListOfCategories = theBudgetOverview.getTheListOfCategories();
+        ArrayList<ExpenseEvent> theListOfExpenses = theBudgetOverview.getTheExpenseList();
+        
+        double fixedCostMax = 0;
+        double flexCostMax = 0;
+        double savingsMax = 0;
+        
+        double currentFixedExpense = 0;
+        double currentFlexExpense = 0;
+        double currentSavingsExpense = 0;
+        
+        for(Category cat: theListOfCategories){
+            switch(cat.getCategoryType()){
+                case "Fixed Costs":
+                    fixedCostMax += cat.getAllowanceProperty().getValue();
+                    break;
+                case "Flexible Spending":
+                    flexCostMax += cat.getAllowanceProperty().getValue();
+                    break;
+                case "Savings":
+                    savingsMax += cat.getAllowanceProperty().getValue();
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        for(ExpenseEvent event: theListOfExpenses){
+             switch(event.getCategoryType()){
+                case "Fixed Costs":
+                    currentFixedExpense += event.getExpenseAmount();
+                    break;
+                case "Flexible Spending":
+                    currentFlexExpense += event.getExpenseAmount();
+                    break;
+                case "Savings":
+                    currentSavingsExpense += event.getExpenseAmount();
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        fixedCostBar.setProgress(currentFixedExpense/fixedCostMax);
+        flexSpendBar.setProgress(currentFlexExpense/flexCostMax);
+        savingsBar.setProgress(currentSavingsExpense/savingsMax);
+        
+        fixedCostPercentage.setText( (Math.round(100 * (currentFixedExpense/fixedCostMax))) + "%");
+        flexSpenPercentage.setText((Math.round(100 * (currentFlexExpense/flexCostMax))) + "%");
+        savingsPercentage.setText((Math.round( 100 * (currentSavingsExpense/savingsMax))) + "%");
+        
+        
     }
     
     public void handleCancelExpenseWindow(){
@@ -222,6 +291,7 @@ public class CalendarViewUIController implements Initializable {
          }
         
          theBudgetOverview.addToExpenseList(anExpenseEvent);
+         initProgressBars();
 
               
     }

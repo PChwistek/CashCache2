@@ -29,12 +29,12 @@ public class BudgetOverview {
     }
     
     public void addToExpenseList(ExpenseEvent anExpenseEvent){
-        theExpenseList.add(anExpenseEvent);
+        getTheExpenseList().add(anExpenseEvent);
     }
     
     public ArrayList<ExpenseEvent> sortExpenseListByDate(LocalDate aDate, String categoryType){
         ArrayList<ExpenseEvent> selectedDayList = new ArrayList();
-        for(ExpenseEvent event: theExpenseList){
+        for(ExpenseEvent event: getTheExpenseList()){
             if(event.getTheDate().isEqual(aDate) && event.getCategoryType().equals(categoryType)){
                 selectedDayList.add(event);
             }
@@ -109,6 +109,20 @@ public class BudgetOverview {
     
     public LocalDate getLastPayDay(){
         return this.theDate;
+    }
+
+    /**
+     * @return the theExpenseList
+     */
+    public ArrayList<ExpenseEvent> getTheExpenseList() {
+        return theExpenseList;
+    }
+
+    /**
+     * @param theExpenseList the theExpenseList to set
+     */
+    public void setTheExpenseList(ArrayList<ExpenseEvent> theExpenseList) {
+        this.theExpenseList = theExpenseList;
     }
     
 }
