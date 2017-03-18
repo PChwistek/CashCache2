@@ -9,9 +9,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+
 
 /**
  * FXML Controller class
@@ -23,27 +25,35 @@ public class CalendarViewUIController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private DatePicker calendar;
     
     @FXML
-    private TreeTableView fixedCostTable;
+    private TableView fixedCostTable;
     //Columns
-    @FXML private TreeTableColumn fixedCostTitleCol;
-    @FXML private TreeTableColumn fixedCostAmountCol;
+    @FXML private TableColumn fixedCostTitleCol;
+    @FXML private TableColumn fixedCostAmountCol;
     
     @FXML
-    private TreeTableView flexSpendingTable;
+    private TableView flexSpendingTable;
     //Columns
-    @FXML private TreeTableColumn flexSpendingTitleCol;
-    @FXML private TreeTableColumn flexSpendingAmountCol;
+    @FXML private TableColumn flexSpendingTitleCol;
+    @FXML private TableColumn flexSpendingAmountCol;
     
     @FXML
-    private TreeTableView savingsTable;
+    private TableView savingsTable;
     //Columns
-    @FXML private TreeTableColumn savingsTitleCol;
-    @FXML private TreeTableColumn savingsAmountCol;
+    @FXML private TableColumn savingsTitleCol;
+    @FXML private TableColumn savingsAmountCol;
+    
+    @FXML private Button fixedCostButton;
+    @FXML private Button flexSpendingButton;
+    @FXML private Button savingsButton;
+    
     
     @FXML
     private BudgetOverviewUIController theBudgetOverviewUICntl;
+    private BudgetOverview theBudgetOverview;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,6 +62,8 @@ public class CalendarViewUIController implements Initializable {
     
      public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
         this.theBudgetOverviewUICntl = aBudgetOverviewCntl;
+        theBudgetOverview = theBudgetOverviewUICntl.getTheBudgetOverview();
+        initCalendar();
     }  
     
     private void initCategoryTables(){
@@ -66,6 +78,12 @@ public class CalendarViewUIController implements Initializable {
         savingsTitleCol.prefWidthProperty().bind(fixedCostTable.widthProperty().divide(2)); savingsTitleCol.setText("Event Title");
         savingsAmountCol.prefWidthProperty().bind(fixedCostTable.widthProperty().divide(2));savingsAmountCol.setText("Amount Logged");
     }
+    
+    private void initCalendar(){
+        
+  
+    }
+    
     
     
 }

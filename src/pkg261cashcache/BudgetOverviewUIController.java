@@ -84,6 +84,7 @@ public class BudgetOverviewUIController implements Initializable {
             categoryDetailUIPanel.getChildren().add(loader.load());
             calendarUICntl = loader.getController();
             calendarUICntl.setBudgetOverviewCntl(this);
+
         } catch(IOException e){
             e.printStackTrace();
         }

@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -35,14 +36,17 @@ public class Paycheck {
     }
     
     public void nextPaycheck(LocalDate lastPayDay, int freqID) {
+        //ArrayList<LocalDate> listOfDays = new ArrayList();
         if (freqID == 0) {
-            newPayDay = lastPayDay.plusWeeks(1);
+            setNewPayDay(lastPayDay.plusWeeks(1));
         } else if (freqID == 1) {
-            newPayDay = lastPayDay.plusWeeks(2);
+            setNewPayDay(lastPayDay.plusWeeks(2));
         } else if (freqID == 2) {
-            newPayDay = lastPayDay.plusMonths(1);
-        }
+            setNewPayDay(lastPayDay.plusMonths(1));
+        }        
     }
+    
+    
 
     /**
      * @return the payDay
@@ -78,6 +82,20 @@ public class Paycheck {
     
     public int getFrequency() {
         return frequency;
+    }
+
+    /**
+     * @return the newPayDay
+     */
+    public LocalDate getNewPayDay() {
+        return newPayDay;
+    }
+
+    /**
+     * @param newPayDay the newPayDay to set
+     */
+    public void setNewPayDay(LocalDate newPayDay) {
+        this.newPayDay = newPayDay;
     }
     
 }
