@@ -22,6 +22,7 @@ public class Paycheck {
     private double checkAmount;
     private int frequency;
     private LocalDate newPayDay;
+    private ArrayList<LocalDate> theListOfPaychecks = new ArrayList();
     //date and time variable
     
     public Paycheck(LocalDate lastPayDay, double aCheckAmount){
@@ -30,20 +31,26 @@ public class Paycheck {
         payDay = lastPayDay;
     }
     
-    public Paycheck(double aCheckAmount){
-        checkAmount = aCheckAmount;
-        payDay = null;
-    }
     
-    public void nextPaycheck(LocalDate lastPayDay, int freqID) {
-        //ArrayList<LocalDate> listOfDays = new ArrayList();
+    public ArrayList<LocalDate> nextPaychecks(LocalDate lastPayDay, int freqID) {
+        ArrayList<LocalDate> listOfDays = new ArrayList();
+        listOfDays.add(lastPayDay);
+        LocalDate toAdd = lastPayDay;
+        int dateCounter = lastPayDay.getDayOfMonth();
         if (freqID == 0) {
-            setNewPayDay(lastPayDay.plusWeeks(1));
+           for(int i = 0; i < lastPayDay.getMonth().maxLength(); i += 7){
+               listOfDays.add(lastPayDay.plusDays(i));
+           }
+            
         } else if (freqID == 1) {
-            setNewPayDay(lastPayDay.plusWeeks(2));
+            for(int i = 0; i < lastPayDay.getMonth().maxLength(); i+= 14){
+                listOfDays.add(lastPayDay.plusDays(i));
+            }
         } else if (freqID == 2) {
-            setNewPayDay(lastPayDay.plusMonths(1));
-        }        
+           listOfDays.add(lastPayDay.plusMonths(1));
+        }  
+        setTheListOfPaychecks(listOfDays);
+        return listOfDays;
     }
     
     
@@ -96,6 +103,20 @@ public class Paycheck {
      */
     public void setNewPayDay(LocalDate newPayDay) {
         this.newPayDay = newPayDay;
+    }
+
+    /**
+     * @return the theListOfPaychecks
+     */
+    public ArrayList<LocalDate> getTheListOfPaychecks() {
+        return theListOfPaychecks;
+    }
+
+    /**
+     * @param theListOfPaychecks the theListOfPaychecks to set
+     */
+    public void setTheListOfPaychecks(ArrayList<LocalDate> theListOfPaychecks) {
+        this.theListOfPaychecks = theListOfPaychecks;
     }
     
 }

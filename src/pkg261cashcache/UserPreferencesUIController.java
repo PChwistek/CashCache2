@@ -7,6 +7,7 @@ package pkg261cashcache;
 
 import java.net.URL;
 import static java.sql.Date.valueOf;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -57,7 +58,7 @@ public class UserPreferencesUIController implements Initializable {
         paycheckFrequency.setItems(paycheckFrequencyList);
         retirementType.setValue("Account Type");
         retirementType.setItems(retirementTypeList);
-        paycheck = new Paycheck(0);
+        paycheck = new Paycheck(LocalDate.now(), 0);
         
     }
     
@@ -104,8 +105,9 @@ public class UserPreferencesUIController implements Initializable {
             }
             
             paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
+            paycheck.setPayDay(lastCheckPicker.getValue());
             paycheck.setFrequency(frequency);
-            paycheck.nextPaycheck(lastCheckPicker.getValue(), frequency);
+            paycheck.nextPaychecks(lastCheckPicker.getValue(), frequency);
             theBudgetOverview.setThePaycheck(paycheck);
             theBudgetOverview.setDOB(dobPicker.getValue());
             theBudgetOverview.setLastPayDay(lastCheckPicker.getValue());

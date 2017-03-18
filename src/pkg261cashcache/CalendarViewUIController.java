@@ -19,14 +19,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 
 /**
@@ -154,6 +157,7 @@ public class CalendarViewUIController implements Initializable {
      public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
          this.setTheBudgetOverviewUICntl(aBudgetOverviewCntl);
          theBudgetOverview = getTheBudgetOverviewUICntl().getTheBudgetOverview();
+         initCalendar();
         
         
     }  
@@ -192,7 +196,7 @@ public class CalendarViewUIController implements Initializable {
     @FXML
     private void initAccordion(){
         if(calendar.getValue() != null){
-            theAccordian.setDisable(false);
+           theAccordian.setDisable(false);
             
            fixedCostEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Fixed Costs");
            flexibleSpendingEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Flexible Spending");
@@ -209,6 +213,43 @@ public class CalendarViewUIController implements Initializable {
            initProgressBars();
 
         }
+    }
+    
+    public void initCalendar(){
+        
+        ArrayList<ExpenseEvent> theListOfEvents = theBudgetOverview.getTheExpenseList();
+        ArrayList<LocalDate> thePaydays = theBudgetOverview.getThePaycheck().getTheListOfPaychecks();
+        LocalDate payDay = theBudgetOverview.getLastPayDay();
+        
+        
+         final Callback<DatePicker, DateCell> dayCellFactory = 
+            new Callback<DatePicker, DateCell>() {
+                @Override
+                public DateCell call(final DatePicker datePicker) {
+                    return new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                            
+                            for(int i = 0; i < thePaydays.size(); i ++){
+                                if(item.isEqual(thePaydays.get(i))){
+                                    setStyle("-fx-background-color: rgba(137, 158, 96, 0.7);");
+                                }
+                            }      
+                            
+                            
+                            for(int i = 0; i < theListOfEvents.size(); i++){
+                                if(item.isEqual(theListOfEvents.get(i).getTheDate())){
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+                            
+                            
+                    }
+                };
+            }
+        };
+        calendar.setDayCellFactory(dayCellFactory);
     }
     
     public void initProgressBars(){

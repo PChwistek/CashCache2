@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pkg261cashcache;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,7 @@ public class CategoryList {
     private Paycheck income;
     
     public CategoryList(Double anIncome){
-        income = new Paycheck(anIncome);
+        income = new Paycheck(LocalDate.now(), anIncome);
     }
     
     public void setTheCategoryList(ObservableList<Category> aCategoryList){

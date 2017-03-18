@@ -7,6 +7,7 @@ package pkg261cashcache;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -45,7 +46,7 @@ public class BudgetOverviewUIController implements Initializable {
     private UserPreferencesUIController userPrefCntl;
  
     public BudgetOverviewUIController(){
-        theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(0));
+        theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(LocalDate.now(), 0));
         theBudgetOverview.getThePaycheck().setFrequency(1);
     }
    

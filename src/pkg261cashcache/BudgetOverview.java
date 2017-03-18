@@ -21,6 +21,7 @@ public class BudgetOverview {
     private ObservableList<Category> theListOfCategories;
     private String theSavingsAccountType; 
     private ArrayList<ExpenseEvent> theExpenseList = new ArrayList();
+    private ArrayList<ExpenseEvent> thePaydays = new ArrayList();
     
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
@@ -30,6 +31,10 @@ public class BudgetOverview {
     
     public void addToExpenseList(ExpenseEvent anExpenseEvent){
         getTheExpenseList().add(anExpenseEvent);
+    }
+    
+    public void generatePaydays(LocalDate firstDay, int frequency){
+        
     }
     
     public ArrayList<ExpenseEvent> sortExpenseListByDate(LocalDate aDate, String categoryType){
