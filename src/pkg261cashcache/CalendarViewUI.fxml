@@ -146,7 +146,7 @@
                                                             <Button fx:id="flexSpendingButton" mnemonicParsing="false" onAction="#handleFlexSpendingButton" text="Create New" GridPane.halignment="CENTER" />
                                                          </children>
                                                       </GridPane>
-                                                      <TableView fx:id="flexSpendingTable" prefHeight="200.0" prefWidth="200.0">
+                                                      <TableView fx:id="flexibleCostTable" prefHeight="200.0" prefWidth="200.0">
                                                         <columns>
                                                           <TableColumn fx:id="flexSpendingCategoryCol" prefWidth="75.0" text="C1" />
                                                           <TableColumn fx:id="flexSpendingTitleCol" prefWidth="75.0" text="C2" />

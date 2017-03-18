@@ -143,7 +143,7 @@ public class CategoryDetailUIController implements Initializable {
         
         for(Category cat: theListOfCategories){
             switch(cat.getCategoryType()){
-                case "Fixed Cost":
+                case "Fixed Costs":
                     fixedCostAllowance += cat.getAllowanceProperty().getValue();
                     break;
                 case "Flexible Spending":

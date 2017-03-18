@@ -40,7 +40,7 @@ public class CreateCategoryUIController implements Initializable {
     @FXML private Label retirement;
     @FXML private Label title;
 
-    ObservableList<String> categoryTypes = FXCollections.observableArrayList("Fixed Cost", "Flexible Spending", "Savings");
+    ObservableList<String> categoryTypes = FXCollections.observableArrayList("Fixed Costs", "Flexible Spending", "Savings");
     ObservableList<String> retirementItems = FXCollections.observableArrayList("No", "Yes");
 
 
