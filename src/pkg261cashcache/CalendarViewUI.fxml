@@ -63,7 +63,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <DatePicker fx:id="calendar" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                        <DatePicker fx:id="calendar" onAction="#initAccordion" promptText="Please Select a Date" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                      </children>
                   </GridPane>
                </children>
@@ -83,7 +83,7 @@
                      <children>
                         <AnchorPane prefHeight="513.0" prefWidth="700.0">
                            <children>
-                              <Accordion layoutX="97.0" layoutY="23.0" prefHeight="348.0" prefWidth="497.0">
+                              <Accordion fx:id="theAccordian" disable="true" layoutX="97.0" layoutY="23.0" prefHeight="348.0" prefWidth="497.0">
                                  <panes>
                                     <TitledPane animated="false" text="Fixed Costs">
                                        <content>

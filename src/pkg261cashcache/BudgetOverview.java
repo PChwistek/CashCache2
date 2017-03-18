@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javafx.collections.ObservableList;
 
 /**
@@ -19,12 +20,29 @@ public class BudgetOverview {
     private LocalDate theDate;
     private ObservableList<Category> theListOfCategories;
     private String theSavingsAccountType; 
+    private ArrayList<ExpenseEvent> theExpenseList = new ArrayList();
     
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
         theCategoryList = aCategoryList;
         theListOfCategories = aCategoryList.getTheListofCategories();     
     }
+    
+    public void addToExpenseList(ExpenseEvent anExpenseEvent){
+        theExpenseList.add(anExpenseEvent);
+    }
+    
+    public ArrayList<ExpenseEvent> sortExpenseListByDate(LocalDate aDate, String categoryType){
+        ArrayList<ExpenseEvent> selectedDayList = new ArrayList();
+        for(ExpenseEvent event: theExpenseList){
+            if(event.getTheDate().isEqual(aDate) && event.getCategoryType().equals(categoryType)){
+                selectedDayList.add(event);
+            }
+        }
+        return selectedDayList;
+    }
+    
+    
 
     /**
      * @return the thePaycheck

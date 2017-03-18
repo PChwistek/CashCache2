@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -62,7 +63,7 @@ public class CalendarViewUIController implements Initializable {
     @FXML private Button fixedCostButton;
     @FXML private Button flexSpendingButton;
     @FXML private Button savingsButton;
-    @FXML private TitledPane theAccordian;
+    @FXML private Accordion theAccordian;
     
     private Stage secondaryStage;
     private CreateNewExpenseController theExpenseCntl;
@@ -86,7 +87,6 @@ public class CalendarViewUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initCategoryTables();
- 
     }    
     
     @FXML
@@ -141,17 +141,8 @@ public class CalendarViewUIController implements Initializable {
     
      public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
          this.setTheBudgetOverviewUICntl(aBudgetOverviewCntl);
-        theBudgetOverview = getTheBudgetOverviewUICntl().getTheBudgetOverview();
-        initCalendar();
+         theBudgetOverview = getTheBudgetOverviewUICntl().getTheBudgetOverview();
         
-        fixedCostRefinedList = FXCollections.observableArrayList(fixedCostEvents);
-        fixedCostTable.setItems(fixedCostRefinedList);
-        
-        flexSpendingRefinedList = FXCollections.observableArrayList(flexibleSpendingEvents);
-        flexibleCostTable.setItems(flexSpendingRefinedList);
-        
-        savingsRefinedList = FXCollections.observableArrayList(savingsEvents);
-        savingsTable.setItems(savingsRefinedList);
         
     }  
     
@@ -186,10 +177,24 @@ public class CalendarViewUIController implements Initializable {
         
     }
     
-    
-    private void initCalendar(){
-        
-  
+    @FXML
+    private void initAccordion(){
+        if(calendar.getValue() != null){
+            theAccordian.setDisable(false);
+            
+           fixedCostEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Fixed Costs");
+           flexibleSpendingEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Flexible Spending");
+           savingsEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Savings");
+            
+           fixedCostRefinedList = FXCollections.observableArrayList(fixedCostEvents);
+           fixedCostTable.setItems(fixedCostRefinedList);
+
+           flexSpendingRefinedList = FXCollections.observableArrayList(flexibleSpendingEvents);
+           flexibleCostTable.setItems(flexSpendingRefinedList);
+
+           savingsRefinedList = FXCollections.observableArrayList(savingsEvents);
+           savingsTable.setItems(savingsRefinedList);
+        }
     }
     
     public void handleCancelExpenseWindow(){
@@ -215,6 +220,9 @@ public class CalendarViewUIController implements Initializable {
              savingsTable.setItems(savingsRefinedList);
              savingsTable.refresh();
          }
+        
+         theBudgetOverview.addToExpenseList(anExpenseEvent);
+
               
     }
 
