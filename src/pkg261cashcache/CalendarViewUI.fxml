@@ -103,7 +103,7 @@
                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                          </columnConstraints>
                                                          <children>
-                                                            <Button mnemonicParsing="false" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="fixedCostButton" mnemonicParsing="false" onAction="#handleFixedCostButton" text="Create New" GridPane.halignment="CENTER" />
                                                          </children>
                                                          <rowConstraints>
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -111,8 +111,9 @@
                                                       </GridPane>
                                                       <TableView fx:id="fixedCostTable" prefHeight="200.0" prefWidth="200.0">
                                                         <columns>
-                                                          <TableColumn fx:id="fixedCostTitleCol" prefWidth="75.0" text="C1" />
-                                                          <TableColumn fx:id="fixedCostAmountCol" prefWidth="75.0" text="C2" />
+                                                          <TableColumn fx:id="fixedCostCategoryCol" prefWidth="75.0" text="C1" />
+                                                          <TableColumn fx:id="fixedCostTitleCol" prefWidth="75.0" text="C2" />
+                                                            <TableColumn fx:id="fixedCostAmountCol" prefWidth="75.0" text="Column X" />
                                                         </columns>
                                                       </TableView>
                                                    </children>
@@ -142,13 +143,14 @@
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <Button mnemonicParsing="false" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="flexSpendingButton" mnemonicParsing="false" onAction="#handleFlexSpendingButton" text="Create New" GridPane.halignment="CENTER" />
                                                          </children>
                                                       </GridPane>
                                                       <TableView fx:id="flexSpendingTable" prefHeight="200.0" prefWidth="200.0">
                                                         <columns>
-                                                          <TableColumn fx:id="flexSpendingTitleCol" prefWidth="75.0" text="C1" />
-                                                          <TableColumn fx:id="flexSpendingAmountCol" prefWidth="75.0" text="C2" />
+                                                          <TableColumn fx:id="flexSpendingCategoryCol" prefWidth="75.0" text="C1" />
+                                                          <TableColumn fx:id="flexSpendingTitleCol" prefWidth="75.0" text="C2" />
+                                                            <TableColumn fx:id="flexSpendingAmountCol" prefWidth="75.0" text="Column X" />
                                                         </columns>
                                                       </TableView>
                                                    </children>
@@ -178,13 +180,14 @@
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <Button mnemonicParsing="false" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="savingsButton" mnemonicParsing="false" onAction="#handleSavingsButton" text="Create New" GridPane.halignment="CENTER" />
                                                          </children>
                                                       </GridPane>
                                                       <TableView fx:id="savingsTable" prefHeight="200.0" prefWidth="200.0">
                                                         <columns>
-                                                          <TableColumn fx:id="savingsTitleCol" prefWidth="75.0" text="C1" />
-                                                          <TableColumn fx:id="savingsAmountCol" prefWidth="75.0" text="C2" />
+                                                          <TableColumn fx:id="savingsCategoryCol" prefWidth="75.0" text="C1" />
+                                                          <TableColumn fx:id="savingsTitleCol" prefWidth="75.0" text="C2" />
+                                                            <TableColumn fx:id="savingsAmountCol" prefWidth="75.0" text="Column X" />
                                                         </columns>
                                                       </TableView>
                                                    </children>
