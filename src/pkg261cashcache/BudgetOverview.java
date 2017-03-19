@@ -7,6 +7,7 @@ package pkg261cashcache;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -18,7 +19,6 @@ public class BudgetOverview {
     private Paycheck thePaycheck;
     private CategoryList theCategoryList;
     private LocalDate theDate;
-    private ObservableList<Category> theListOfCategories;
     private String theSavingsAccountType; 
     private ArrayList<ExpenseEvent> theExpenseList = new ArrayList();
     private ArrayList<ExpenseEvent> thePaydays = new ArrayList();
@@ -26,19 +26,27 @@ public class BudgetOverview {
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
         theCategoryList = aCategoryList;
-        theListOfCategories = aCategoryList.getTheListofCategories();     
     }
     
     public void addToExpenseList(ExpenseEvent anExpenseEvent){
         getTheExpenseList().add(anExpenseEvent);
     }
     
+    public void removeFromExpenseList(ExpenseEvent anExpenseEvent){
+        
+        for(int i = 0; i < theExpenseList.size(); i++){
+            if(theExpenseList.get(i).equals(anExpenseEvent)){
+                theExpenseList.remove(i);
+            }
+        }
+    }
+    
     public void generatePaydays(LocalDate firstDay, int frequency){
         
     }
     
-    public ArrayList<ExpenseEvent> sortExpenseListByDate(LocalDate aDate, String categoryType){
-        ArrayList<ExpenseEvent> selectedDayList = new ArrayList();
+    public ObservableList<ExpenseEvent> sortExpenseListByDate(LocalDate aDate, String categoryType){
+        ObservableList<ExpenseEvent> selectedDayList = FXCollections.observableArrayList();
         for(ExpenseEvent event: getTheExpenseList()){
             if(event.getTheDate().isEqual(aDate) && event.getCategoryType().equals(categoryType)){
                 selectedDayList.add(event);
@@ -77,18 +85,12 @@ public class BudgetOverview {
         this.theCategoryList = theCategoryList;
     }
 
-    /**
-     * @return the theListOfCategories
-     */
-    public ObservableList<Category> getTheListOfCategories() {
-        return theListOfCategories;
-    }
-
+   
     /**
      * @param theListOfCategories the theListOfCategories to set
      */
     public void setTheListOfCategories(ObservableList<Category> theListOfCategories) {
-        this.theListOfCategories = theListOfCategories;
+        theCategoryList.setTheCategoryList(theListOfCategories);
     }
     
     public void setDOB(LocalDate aDate){

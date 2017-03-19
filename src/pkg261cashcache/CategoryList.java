@@ -71,5 +71,33 @@ public class CategoryList {
         this.income = income;
     }
     
+    public boolean fixedCostCategories(){
+        for(Category cat: theCategoryList){
+            if(cat.getCategoryType().equals("Fixed Costs")){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean flexSpendingCategories(){
+        for(Category cat: theCategoryList){
+            if(cat.getCategoryType().equals("Flexible Spending")){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    public boolean savingsCategories(){
+         for(Category cat: theCategoryList){
+            if(cat.getCategoryType().equals("Savings")){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     
 }

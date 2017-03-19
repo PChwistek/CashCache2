@@ -85,6 +85,7 @@ public class BudgetOverviewUIController implements Initializable {
             categoryDetailUIPanel.getChildren().add(loader.load());
             calendarUICntl = loader.getController();
             calendarUICntl.setBudgetOverviewCntl(this);
+            categoryListUIController.clearSelections();
 
         } catch(IOException e){
             e.printStackTrace();
@@ -93,7 +94,6 @@ public class BudgetOverviewUIController implements Initializable {
     
     public void updateCategoryUI(){
         categoryListUIController.updateCategoryUI(this.getMonthlyIncome());
-        theCalendarButton.setDisable(false);
         
     }
     
@@ -123,8 +123,8 @@ public class BudgetOverviewUIController implements Initializable {
     
     public double calculateRemainingFunds(){
        double expenses = 0;
-        for(int i = 0; i < theBudgetOverview.getTheListOfCategories().size(); i++){
-            expenses += theBudgetOverview.getTheListOfCategories().get(i).getAllowanceProperty().getValue();
+        for(int i = 0; i < theBudgetOverview.getTheCategoryList().getTheListofCategories().size(); i++){
+            expenses += theBudgetOverview.getTheCategoryList().getTheListofCategories().get(i).getAllowanceProperty().getValue();
         }
         return getMonthlyIncome() - expenses;
     }
@@ -149,8 +149,9 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public void createCategory(Category aCategory){
-        theBudgetOverview.getTheListOfCategories().add(aCategory);
+        theBudgetOverview.getTheCategoryList().getTheListofCategories().add(aCategory);
         updateCategoryUI();
+        theCalendarButton.setDisable(false);
         closeRightPanel();
     }
     
@@ -174,7 +175,7 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public void deleteItem(Category cat){
-        ObservableList<Category> theList = theBudgetOverview.getTheListOfCategories();
+        ObservableList<Category> theList = theBudgetOverview.getTheCategoryList().getTheListofCategories();
         int listSize = theList.size();
         for(int i = 0; i < listSize ; i++){
             if(theList.get(i).isEqual(cat)){
@@ -185,6 +186,7 @@ public class BudgetOverviewUIController implements Initializable {
         updateCategoryUI();
         categoryDetailUIPanel.getChildren().clear();
     }
+    
     
     
 }

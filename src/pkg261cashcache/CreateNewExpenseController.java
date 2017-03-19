@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -51,7 +52,7 @@ public class CreateNewExpenseController implements Initializable {
     }
     
     private void populateComboBox(){
-        ObservableList<Category> theListOfCategories = theCalendarCntl.getTheBudgetOverviewUICntl().getTheBudgetOverview().getTheListOfCategories();
+        ObservableList<Category> theListOfCategories = theCalendarCntl.getTheBudgetOverviewUICntl().getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
         
         ObservableList<String> refinedObservableList;
         ArrayList<String> refinedArrayList = new ArrayList();
@@ -79,7 +80,11 @@ public class CreateNewExpenseController implements Initializable {
             theCalendarCntl.handleCreateExpense(theExpenseEvent);
             handleCancelButton();
         }catch(Exception e){
-            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Incorrect Input");
+            alert.setHeaderText("Please enter all fields");
+            alert.setContentText("Make sure to properly enter all your information");
+            alert.showAndWait();
         }
     }
 }

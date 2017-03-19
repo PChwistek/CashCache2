@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +19,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -39,6 +43,7 @@ import javafx.util.Callback;
  */
 public class CalendarViewUIController implements Initializable {
 
+   
     /**
      * Initializes the controller class.
      */
@@ -68,7 +73,15 @@ public class CalendarViewUIController implements Initializable {
     @FXML private Button fixedCostButton;
     @FXML private Button flexSpendingButton;
     @FXML private Button savingsButton;
+    @FXML private Button fixedCostDelete;
+    @FXML private Button flexSpendingDelete;
+    @FXML private Button savingsDelete;
+    
     @FXML private Accordion theAccordian;
+    @FXML private TitledPane theFixedCostPane;
+    @FXML private TitledPane theFlexSpendingPane;
+    @FXML private TitledPane theSavingsPane;
+    
     
     @FXML private ProgressBar fixedCostBar;
     @FXML private ProgressBar flexSpendBar;
@@ -81,9 +94,7 @@ public class CalendarViewUIController implements Initializable {
     
     private Stage secondaryStage;
     private CreateNewExpenseController theExpenseCntl;
-    private ArrayList<ExpenseEvent> fixedCostEvents = new ArrayList();
-    private ArrayList<ExpenseEvent> flexibleSpendingEvents = new ArrayList();
-    private ArrayList<ExpenseEvent> savingsEvents = new ArrayList();
+    private ExpenseEvent currentExpenseEvent;
     private ObservableList<ExpenseEvent> fixedCostRefinedList;
     private ObservableList<ExpenseEvent> flexSpendingRefinedList;
     private ObservableList<ExpenseEvent> savingsRefinedList;
@@ -100,8 +111,20 @@ public class CalendarViewUIController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        fixedCostTable.setEditable(false);
+        flexibleCostTable.setEditable(false);
+        savingsTable.setEditable(false);
+        fixedCostDelete.setDisable(true);
+        flexSpendingDelete.setDisable(true);
+        savingsDelete.setDisable(true);
         initCategoryTables();
         
+
+        fixedCostTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showExpenseEvent(newValue));
+        flexibleCostTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showExpenseEvent(newValue));
+        savingsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showExpenseEvent(newValue));
+            
+  
     }    
     
     @FXML
@@ -150,7 +173,8 @@ public class CalendarViewUIController implements Initializable {
             secondaryStage.showAndWait(); 
             
         } catch (IOException e){
-             e.printStackTrace();
+            e.printStackTrace();
+              
         }
     }
     
@@ -158,13 +182,13 @@ public class CalendarViewUIController implements Initializable {
          this.setTheBudgetOverviewUICntl(aBudgetOverviewCntl);
          theBudgetOverview = getTheBudgetOverviewUICntl().getTheBudgetOverview();
          initCalendar();
-        
-        
     }  
     
     private void initCategoryTables(){
         
         //Fixed Cost Table resize
+        
+        
         fixedCostCategoryCol.prefWidthProperty().bind(fixedCostTable.widthProperty().divide(3)); fixedCostCategoryCol.setText("Category");
         fixedCostTitleCol.prefWidthProperty().bind(fixedCostTable.widthProperty().divide(3)); fixedCostTitleCol.setText("Event Title");
         fixedCostAmountCol.prefWidthProperty().bind(fixedCostTable.widthProperty().divide(3)); fixedCostAmountCol.setText("Amount Logged");
@@ -196,20 +220,30 @@ public class CalendarViewUIController implements Initializable {
     @FXML
     private void initAccordion(){
         if(calendar.getValue() != null){
-           theAccordian.setDisable(false);
-            
-           fixedCostEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Fixed Costs");
-           flexibleSpendingEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Flexible Spending");
-           savingsEvents = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Savings");
-            
-           fixedCostRefinedList = FXCollections.observableArrayList(fixedCostEvents);
+              
+           
+           fixedCostRefinedList = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Fixed Costs");
+           flexSpendingRefinedList = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Flexible Spending");
+           savingsRefinedList = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Savings");
+           
            fixedCostTable.setItems(fixedCostRefinedList);
-
-           flexSpendingRefinedList = FXCollections.observableArrayList(flexibleSpendingEvents);
            flexibleCostTable.setItems(flexSpendingRefinedList);
-
-           savingsRefinedList = FXCollections.observableArrayList(savingsEvents);
            savingsTable.setItems(savingsRefinedList);
+           
+            theAccordian.setDisable(false);
+            
+           if(theBudgetOverview.getTheCategoryList().fixedCostCategories() == true){
+               fixedCostButton.setDisable(false);
+           }
+           
+           if(theBudgetOverview.getTheCategoryList().flexSpendingCategories() == true){
+               flexSpendingButton.setDisable(false);
+           }
+           
+           if(theBudgetOverview.getTheCategoryList().savingsCategories() == true){
+               savingsButton.setDisable(false);
+           }
+           
            initProgressBars();
 
         }
@@ -220,6 +254,7 @@ public class CalendarViewUIController implements Initializable {
         ArrayList<ExpenseEvent> theListOfEvents = theBudgetOverview.getTheExpenseList();
         ArrayList<LocalDate> thePaydays = theBudgetOverview.getThePaycheck().getTheListOfPaychecks();
         LocalDate payDay = theBudgetOverview.getLastPayDay();
+        setSelectedDate(calendar.getValue());
         
         
          final Callback<DatePicker, DateCell> dayCellFactory = 
@@ -237,14 +272,11 @@ public class CalendarViewUIController implements Initializable {
                                 }
                             }      
                             
-                            
                             for(int i = 0; i < theListOfEvents.size(); i++){
                                 if(item.isEqual(theListOfEvents.get(i).getTheDate())){
                                     setStyle("-fx-background-color: #ffc0cb;");
                                 }
                             }
-                            
-                            
                     }
                 };
             }
@@ -253,7 +285,7 @@ public class CalendarViewUIController implements Initializable {
     }
     
     public void initProgressBars(){
-        ObservableList<Category> theListOfCategories = theBudgetOverview.getTheListOfCategories();
+        ObservableList<Category> theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
         ArrayList<ExpenseEvent> theListOfExpenses = theBudgetOverview.getTheExpenseList();
         
         double fixedCostMax = 0;
@@ -311,31 +343,108 @@ public class CalendarViewUIController implements Initializable {
         secondaryStage.close();
     }
     
+    @FXML
+    public void handleFlexDelete(){
+        if(deleteConfirm() == true){
+            theBudgetOverview.removeFromExpenseList(flexibleCostTable.getSelectionModel().getSelectedItem());
+            try{
+                updateTables();
+                initProgressBars();
+                initCalendar();
+            } catch(NullPointerException e){
+                
+            }
+        }
+    } 
+    
+    @FXML
+    public void handleFixedDelete(){
+        if(deleteConfirm() == true){
+            theBudgetOverview.removeFromExpenseList(fixedCostTable.getSelectionModel().getSelectedItem());
+            try{
+                updateTables();
+                initProgressBars();
+                initCalendar();
+            } catch(NullPointerException e){
+                
+            }
+        }
+    }
+    
+    @FXML
+    public void handleSavingsDelete(){
+        if(deleteConfirm() == true){
+            theBudgetOverview.removeFromExpenseList(savingsTable.getSelectionModel().getSelectedItem());
+            try{
+                updateTables();
+                initProgressBars();
+                initCalendar();
+            }catch(NullPointerException e){
+                
+            }
+        }
+    }
+    
+    public boolean deleteConfirm(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete?");
+        alert.setHeaderText("Are you sure you want to delete this item?");
+        alert.setContentText("Once deleted, this data cannot be retrieved");
+        ButtonType okButton = new ButtonType("OK",  ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okButton, cancelButton);
+        Optional<ButtonType> result = alert.showAndWait();  
+        if(result.get() == okButton){
+            return true;
+        }
+        return false;
+    }
+    private void updateTables(){
+     
+        fixedCostRefinedList = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Fixed Costs");
+        flexSpendingRefinedList = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Flexible Spending");
+        savingsRefinedList = theBudgetOverview.sortExpenseListByDate(calendar.getValue(), "Savings");
+        fixedCostTable.setItems(fixedCostRefinedList);
+        flexibleCostTable.setItems(flexSpendingRefinedList);
+        savingsTable.setItems(savingsRefinedList);
+        clearSelections();
+    }
+    
+    
+    public void clearSelections(){
+        
+        if(fixedCostTable.getSelectionModel()!= null){
+            fixedCostTable.getSelectionModel().clearSelection();
+        }
+        if(flexibleCostTable.getSelectionModel() != null){
+            flexibleCostTable.getSelectionModel().clearSelection();
+        }
+        
+        if(savingsTable.getSelectionModel() != null){
+            savingsTable.getSelectionModel().clearSelection();
+        }
+     
+    }
+    
     public void handleCreateExpense(ExpenseEvent anExpenseEvent){
-        
-        
-        if(anExpenseEvent.getCategoryType().equalsIgnoreCase("Fixed Costs")){
-            fixedCostEvents.add(anExpenseEvent);
-            fixedCostRefinedList = FXCollections.observableArrayList(fixedCostEvents);
-            fixedCostTable.setItems(fixedCostRefinedList);
-            fixedCostTable.refresh();
-        } else if (anExpenseEvent.getCategoryType().equalsIgnoreCase("Flexible Spending")){
-             flexibleSpendingEvents.add(anExpenseEvent);
-             flexSpendingRefinedList = FXCollections.observableArrayList(flexibleSpendingEvents);
-             flexibleCostTable.setItems(flexSpendingRefinedList);
-             flexibleCostTable.refresh();
-         } else if (anExpenseEvent.getCategoryType().equalsIgnoreCase("Savings")){
-             savingsEvents.add(anExpenseEvent);
-             savingsRefinedList = FXCollections.observableArrayList(savingsEvents);
-             savingsTable.setItems(savingsRefinedList);
-             savingsTable.refresh();
-         }
-        
          theBudgetOverview.addToExpenseList(anExpenseEvent);
+         updateTables();
          initProgressBars();
 
-              
     }
+    
+    public void showExpenseEvent(ExpenseEvent anEvent){
+        
+        if(anEvent != null)
+            if(anEvent.getCategoryType().equals("Fixed Costs")){
+                fixedCostDelete.setDisable(false);
+            } else if(anEvent.getCategoryType().equals("Flexible Spending")){
+                flexSpendingDelete.setDisable(false);
+            } else if (anEvent.getCategoryType().equals("Savings")){
+                savingsDelete.setDisable(false);
+            }
+    }
+    
 
     /**
      * @return the theBudgetOverviewUICntl
@@ -368,6 +477,19 @@ public class CalendarViewUIController implements Initializable {
         this.selectedDate = selectedDate;
     }
     
-    
+     /**
+     * @return the currentExpenseEvent
+     */
+    public ExpenseEvent getCurrentExpenseEvent() {
+        return currentExpenseEvent;
+    }
+
+    /**
+     * @param currentExpenseEvent the currentExpenseEvent to set
+     */
+    public void setCurrentExpenseEvent(ExpenseEvent currentExpenseEvent) {
+        this.currentExpenseEvent = currentExpenseEvent;
+    }
+
     
 }

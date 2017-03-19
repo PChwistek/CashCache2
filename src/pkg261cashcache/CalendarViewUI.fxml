@@ -85,7 +85,7 @@
                            <children>
                               <Accordion fx:id="theAccordian" disable="true" layoutX="97.0" layoutY="23.0" prefHeight="348.0" prefWidth="497.0">
                                  <panes>
-                                    <TitledPane animated="false" text="Fixed Costs">
+                                    <TitledPane fx:id="theFixedCostPane" animated="false" text="Fixed Costs">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -101,9 +101,11 @@
                                                       <GridPane prefHeight="116.0" prefWidth="475.0" GridPane.rowIndex="1">
                                                          <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                          </columnConstraints>
                                                          <children>
-                                                            <Button fx:id="fixedCostButton" mnemonicParsing="false" onAction="#handleFixedCostButton" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="fixedCostButton" disable="true" mnemonicParsing="false" onAction="#handleFixedCostButton" prefWidth="80.0" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="fixedCostDelete" disable="true" mnemonicParsing="false" onAction="#handleFixedDelete" prefWidth="80.0" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                                                          </children>
                                                          <rowConstraints>
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -122,7 +124,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" prefHeight="30.0" text="Flexible Spending">
+                                    <TitledPane fx:id="theFlexSpendingPane" animated="false" prefHeight="30.0" text="Flexible Spending">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -138,12 +140,14 @@
                                                       <GridPane prefHeight="123.0" prefWidth="495.0" GridPane.rowIndex="1">
                                                          <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                          </columnConstraints>
                                                          <rowConstraints>
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <Button fx:id="flexSpendingButton" mnemonicParsing="false" onAction="#handleFlexSpendingButton" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="flexSpendingButton" disable="true" mnemonicParsing="false" onAction="#handleFlexSpendingButton" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="flexSpendingDelete" disable="true" mnemonicParsing="false" onAction="#handleFlexDelete" prefWidth="80.0" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                                                          </children>
                                                       </GridPane>
                                                       <TableView fx:id="flexibleCostTable" prefHeight="200.0" prefWidth="200.0">
@@ -159,7 +163,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Savings">
+                                    <TitledPane fx:id="theSavingsPane" animated="false" text="Savings">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -175,12 +179,14 @@
                                                       <GridPane GridPane.rowIndex="1">
                                                          <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                          </columnConstraints>
                                                          <rowConstraints>
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <Button fx:id="savingsButton" mnemonicParsing="false" onAction="#handleSavingsButton" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="savingsButton" disable="true" mnemonicParsing="false" onAction="#handleSavingsButton" prefWidth="80.0" text="Create New" GridPane.halignment="CENTER" />
+                                                            <Button fx:id="savingsDelete" disable="true" mnemonicParsing="false" onAction="#handleSavingsDelete" prefWidth="80.0" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                                                          </children>
                                                       </GridPane>
                                                       <TableView fx:id="savingsTable" prefHeight="200.0" prefWidth="200.0">

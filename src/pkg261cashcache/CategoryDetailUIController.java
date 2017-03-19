@@ -82,7 +82,7 @@ public class CategoryDetailUIController implements Initializable {
     
     public void setAllowance(){
         try{
-            ObservableList<Category> theList = theBudgetOverviewCntl.getTheBudgetOverview().getTheListOfCategories();
+            ObservableList<Category> theList = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
             int listSize = theList.size();
             
             for(int i = 0; i < listSize ; i++){
@@ -122,14 +122,14 @@ public class CategoryDetailUIController implements Initializable {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Incorrect Input");
-            alert.setHeaderText("Please make sure you entered a valid allowanmce");
+            alert.setHeaderText("Please make sure you entered a valid allowance");
             alert.setContentText("Make sure to properly enter all your information");
             alert.showAndWait();    
         }
     }
     
     private void setUserAllocationChart(){ //user chart data
-        ObservableList<Category> theListOfCategories = theBudgetOverviewCntl.getTheBudgetOverview().getTheListOfCategories();
+        ObservableList<Category> theListOfCategories = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
         double fixedCostAllowance = 0;
         double flexSpendingAllowance = 0;
         double savingsAllowance = 0;

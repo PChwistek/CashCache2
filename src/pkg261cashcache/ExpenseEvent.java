@@ -35,6 +35,19 @@ public class ExpenseEvent {
         this.eventTitleProperty = new SimpleStringProperty(anEventTitle);
         this.theDate= aDate;
     }
+    
+    public boolean equals(ExpenseEvent anotherEvent){
+        if(this.category.equals(anotherEvent.getCategory())){
+            if(this.categoryType.equals(anotherEvent.getCategoryType())){
+                if(this.theDate.equals(anotherEvent.getTheDate())){
+                    if(this.eventTitle.equals(anotherEvent.getEventTitle())){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * @return the category

@@ -46,6 +46,8 @@ public class CategoryListUIController implements Initializable {
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
         this.theBudgetOverviewUICntl = aBudgetOverviewCntl;
+        theBudgetOverview = aBudgetOverviewCntl.getTheBudgetOverview();
+        theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
     }
     
     private void initCategoryTable(){
@@ -68,8 +70,6 @@ public class CategoryListUIController implements Initializable {
     public void updateCategoryUI(double anIncome){
         incomeAmount.setText("$" + anIncome);
         this.theBudgetOverview = theBudgetOverviewUICntl.getTheBudgetOverview();
-        theCategoryList = theBudgetOverview.getTheCategoryList();
-        theListOfCategories = theCategoryList.getTheListofCategories();
         categoryTable.setItems(theListOfCategories);
         fundsRemaining.setText("$" + (anIncome - calculateCurrentTotalAllocations()));
         categoryTable.refresh();   
@@ -94,6 +94,11 @@ public class CategoryListUIController implements Initializable {
         if(aCat != null){
             theBudgetOverviewUICntl.setDetailViewCategoryUI(aCat);
         }
+    }
+    
+    public void clearSelections(){
+        categoryTable.getSelectionModel().clearSelection();
+        categoryTable.refresh();
     }
     
 }

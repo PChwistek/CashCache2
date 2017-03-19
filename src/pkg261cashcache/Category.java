@@ -23,10 +23,12 @@ public class Category {
     private static int idCount = 1;
     private double allowance;
     private StringProperty categoryTitle;
+    private String categoryName;
     private String categoryType;
     
     public Category(double anAllowance, String aTitle, String aCategoryType){
         allowance = anAllowance;
+        categoryName = aTitle;
         categoryTitle = new SimpleStringProperty(aTitle);
         categoryType = aCategoryType;
         idNum = idCount;
@@ -95,6 +97,20 @@ public class Category {
             return true;
         } 
         return false;
+    }
+
+    /**
+     * @return the categoryName
+     */
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    /**
+     * @param categoryName the categoryName to set
+     */
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
         
 }
