@@ -5,10 +5,15 @@
  */
 package pkg261cashcache;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
+
+
 
 /**
  *
@@ -39,6 +44,8 @@ public class BudgetOverview {
                 theExpenseList.remove(i);
             }
         }
+                
+        
     }
     
     public void generatePaydays(LocalDate firstDay, int frequency){
