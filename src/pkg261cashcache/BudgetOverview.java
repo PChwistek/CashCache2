@@ -13,8 +13,6 @@ import javafx.collections.ObservableList;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
-
-
 /**
  *
  * @author Phil
