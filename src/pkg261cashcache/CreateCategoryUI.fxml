@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg261cashcache.CreateCategoryUIController">
+<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg261cashcache.CreateCategoryUIController">
    <children>
       <BorderPane layoutX="98.0" layoutY="73.0" prefHeight="630.0" prefWidth="700.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <top>
             <AnchorPane prefHeight="88.0" prefWidth="670.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="title" alignment="CENTER" prefHeight="17.0" prefWidth="670.0" text="Create a new Expense Category">
+                  <Label fx:id="title" alignment="CENTER" layoutY="55.0" prefHeight="95.0" prefWidth="670.0" text="Create a new Expense Category">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -33,7 +33,7 @@
             </AnchorPane>
          </top>
          <bottom>
-            <AnchorPane prefHeight="90.0" prefWidth="670.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="291.0" prefWidth="670.0" BorderPane.alignment="CENTER">
                <children>
                   <GridPane layoutX="26.0" prefHeight="90.0" prefWidth="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
@@ -44,14 +44,15 @@
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefWidth="145.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefWidth="145.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                            <GridPane.margin>
                               <Insets right="15.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreate" prefWidth="145.0" text="Create" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreate" prefWidth="145.0" text="Create" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                            <GridPane.margin>
                               <Insets left="15.0" />
                            </GridPane.margin>
@@ -64,7 +65,7 @@
          <center>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="376.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane layoutY="14.0" prefHeight="420.0" prefWidth="331.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                  <GridPane layoutY="14.0" prefHeight="395.0" prefWidth="390.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -72,7 +73,6 @@
                         <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="249.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <GridPane>
