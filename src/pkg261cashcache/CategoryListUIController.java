@@ -56,6 +56,10 @@ public class CategoryListUIController implements Initializable {
         categoryTable.setPlaceholder(new Label("Create a category"));
         firstTableColumn.setCellValueFactory(cellData -> cellData.getValue().getCategoryTitle());
         secondTableColumn.setCellValueFactory(cellData -> cellData.getValue().getAllowanceProperty());
+        
+        firstTableColumn.prefWidthProperty().bind(categoryTable.widthProperty().divide(2));
+        secondTableColumn.prefWidthProperty().bind(categoryTable.widthProperty().divide(2));
+      
     }
      
 
