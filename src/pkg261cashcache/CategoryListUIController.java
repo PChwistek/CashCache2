@@ -47,7 +47,9 @@ public class CategoryListUIController implements Initializable {
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
         this.theBudgetOverviewUICntl = aBudgetOverviewCntl;
         theBudgetOverview = aBudgetOverviewCntl.getTheBudgetOverview();
-        theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
+        if(theBudgetOverview.getTheCategoryList() != null){
+            theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
+        }
     }
     
     private void initCategoryTable(){
@@ -83,10 +85,13 @@ public class CategoryListUIController implements Initializable {
     
     public double calculateCurrentTotalAllocations(){
         double funds = 0;
-        for(int i = 0; i < theListOfCategories.size(); i++){
-            funds += theListOfCategories.get(i).getAllowanceProperty().getValue();
+        if(theListOfCategories != null){
+            for(int i = 0; i < theListOfCategories.size(); i++){
+                funds += theListOfCategories.get(i).getAllowanceProperty().getValue();
+            }
         }
         return funds;
+        
     }
     
     public void createNewCategory(){

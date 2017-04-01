@@ -25,14 +25,20 @@ public class BudgetOverview {
     private String theSavingsAccountType; 
     private ArrayList<ExpenseEvent> theExpenseList = new ArrayList();
     private ArrayList<ExpenseEvent> thePaydays = new ArrayList();
+    private PersistentDataController theDataCntl = new PersistentDataController();
     
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
         theCategoryList = aCategoryList;
     }
     
+    public void saveBudgetOverview(){
+        theDataCntl.exportList(this);
+    }
+    
     public void addToExpenseList(ExpenseEvent anExpenseEvent){
         getTheExpenseList().add(anExpenseEvent);
+        saveBudgetOverview();
     }
     
     public void removeFromExpenseList(ExpenseEvent anExpenseEvent){
@@ -42,7 +48,7 @@ public class BudgetOverview {
                 theExpenseList.remove(i);
             }
         }
-                
+        saveBudgetOverview();
         
     }
     
@@ -74,6 +80,8 @@ public class BudgetOverview {
      */
     public void setThePaycheck(Paycheck thePaycheck) {
         this.thePaycheck = thePaycheck;
+        saveBudgetOverview();
+
     }
 
     /**
@@ -88,6 +96,7 @@ public class BudgetOverview {
      */
     public void setTheCategoryList(CategoryList theCategoryList) {
         this.theCategoryList = theCategoryList;
+        saveBudgetOverview();
     }
 
    
@@ -96,10 +105,12 @@ public class BudgetOverview {
      */
     public void setTheListOfCategories(ObservableList<Category> theListOfCategories) {
         theCategoryList.setTheCategoryList(theListOfCategories);
+        saveBudgetOverview();
     }
     
     public void setDOB(LocalDate aDate){
         this.theDate = aDate;
+        saveBudgetOverview();
     }
     
     public LocalDate getDOB(){
@@ -108,6 +119,7 @@ public class BudgetOverview {
     
     public void setAccountType(String anAccountType){
         theSavingsAccountType = anAccountType;
+        saveBudgetOverview();
     }
     
     public String getAccountType(){
@@ -117,6 +129,7 @@ public class BudgetOverview {
     
     public void setLastPayDay(LocalDate aDate){
         this.theDate = aDate;
+        saveBudgetOverview();
     }
     
     public LocalDate getLastPayDay(){
@@ -135,6 +148,7 @@ public class BudgetOverview {
      */
     public void setTheExpenseList(ArrayList<ExpenseEvent> theExpenseList) {
         this.theExpenseList = theExpenseList;
+        saveBudgetOverview();
     }
     
 }

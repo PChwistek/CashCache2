@@ -119,7 +119,6 @@ public class CalendarViewUIController implements Initializable {
         savingsDelete.setDisable(true);
         initCategoryTables();
         
-
         fixedCostTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showExpenseEvent(newValue));
         flexibleCostTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showExpenseEvent(newValue));
         savingsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showExpenseEvent(newValue));

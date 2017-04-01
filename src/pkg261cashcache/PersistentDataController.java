@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class PersistentDataController {
     
-    private final Gson gson = new GsonBuilder().create();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    
     private BudgetOverview importedBudget;
     //private String[] importedProperties = SerializedCollectionController.TheSerializedCollectionController.properties();
     

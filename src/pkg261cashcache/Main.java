@@ -23,6 +23,8 @@ public class Main extends Application {
     private Stage primaryStage;
     private AnchorPane rootLayout;
     private AnchorPane categoryListLayout;
+    private PersistentDataController theDataCntl;
+    private BudgetOverviewUIController theBudgetOverviewCntl;
     
     
     @Override
@@ -37,10 +39,11 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("BudgetOverviewUI.fxml"));
             rootLayout = loader.load();
-            
+            theBudgetOverviewCntl = loader.getController();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+          
             
         } catch (IOException e){
              e.printStackTrace();

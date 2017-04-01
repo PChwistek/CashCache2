@@ -34,22 +34,25 @@ public class BudgetOverviewUIController implements Initializable {
      */
     @FXML private Button thePreferencesButton;
     @FXML private Button theCalendarButton;
+    @FXML private Button theMarketButton;
     @FXML private AnchorPane categoryListUI;
     @FXML private AnchorPane categoryDetailUIPanel;
     @FXML private CategoryListUIController categoryListUIController;
     private CreateCategoryUIController createCatCntl;
     private CategoryDetailUIController catDetailCntl;
     private CalendarViewUIController calendarUICntl;
+    private MarketUIController theMarketCntl;
     private Stage secondaryStage;
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
+    private PersistentDataController theDataCntl;
  
     public BudgetOverviewUIController(){
         theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(LocalDate.now(), 0));
         theBudgetOverview.getThePaycheck().setFrequency(1);
-        PersistentDataController persistentController = new PersistentDataController();
-        theBudgetOverview = persistentController.importList();
+    
+        
     }
    
     @Override
@@ -74,6 +77,22 @@ public class BudgetOverviewUIController implements Initializable {
             
         } catch (IOException e){
              e.printStackTrace();
+        }
+    }
+    
+    @FXML 
+    private void handleMarketButton(){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("MarketUI.fxml"));
+            categoryDetailUIPanel.getChildren().clear();
+            categoryDetailUIPanel.getChildren().add(loader.load());
+            theMarketCntl = loader.getController();
+            theMarketCntl.setBudgetOverviewCntl(this);
+            categoryListUIController.clearSelections();
+
+        } catch(IOException e){
+            e.printStackTrace();
         }
     }
     
