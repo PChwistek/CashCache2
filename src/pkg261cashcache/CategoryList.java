@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
  */
 public class CategoryList {
     
-    private ObservableList <Category> theCategoryList = FXCollections.observableArrayList();
+    private ArrayList <Category> theCategoryList = new ArrayList();
 
     private Paycheck income;
     
@@ -23,12 +23,12 @@ public class CategoryList {
         income = new Paycheck(LocalDate.now(), anIncome);
     }
     
-    public void setTheCategoryList(ObservableList<Category> aCategoryList){
+    public void setTheCategoryList(ArrayList<Category> aCategoryList){
         theCategoryList = aCategoryList;
     }
     
-    public ObservableList<Category> getTheListofCategories(){
-        return getTheCategoryList();
+    public ArrayList<Category> getTheListofCategories(){
+        return theCategoryList;
     }
     
     public void populateDefaultCategoryList(){
@@ -48,13 +48,6 @@ public class CategoryList {
         getTheCategoryList().add(flexSpending);
         */
         
-    }
-
-    /**
-     * @return the theCategoryList
-     */
-    public ObservableList <Category> getTheCategoryList() {
-        return theCategoryList;
     }
 
     /**

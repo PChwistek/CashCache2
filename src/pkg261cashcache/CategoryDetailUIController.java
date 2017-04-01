@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -82,7 +83,7 @@ public class CategoryDetailUIController implements Initializable {
     
     public void setAllowance(){
         try{
-            ObservableList<Category> theList = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
+            ArrayList<Category> theList = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
             int listSize = theList.size();
             
             for(int i = 0; i < listSize ; i++){
@@ -109,8 +110,12 @@ public class CategoryDetailUIController implements Initializable {
         theCategoryAllowance.setText("" + Math.round(allowanceSlider.getValue()));
         setAllowance();
         setUserAllocationChart();
-        theBudgetOverviewCntl.updateCategoryUI();
     }
+    
+    @FXML private void handleSliderUpdate(){
+       theBudgetOverviewCntl.getCategoryListUIController().clearSelections();
+    }
+    
     
     @FXML private void handleAllowanceTextField(){ // lots of defensive programming here
         try{
@@ -129,7 +134,7 @@ public class CategoryDetailUIController implements Initializable {
     }
     
     private void setUserAllocationChart(){ //user chart data
-        ObservableList<Category> theListOfCategories = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
+        ArrayList<Category> theListOfCategories = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
         double fixedCostAllowance = 0;
         double flexSpendingAllowance = 0;
         double savingsAllowance = 0;

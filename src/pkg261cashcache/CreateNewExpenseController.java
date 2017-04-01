@@ -52,7 +52,7 @@ public class CreateNewExpenseController implements Initializable {
     }
     
     private void populateComboBox(){
-        ObservableList<Category> theListOfCategories = theCalendarCntl.getTheBudgetOverviewUICntl().getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
+        ArrayList<Category> theListOfCategories = theCalendarCntl.getTheBudgetOverviewUICntl().getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
         
         ObservableList<String> refinedObservableList;
         ArrayList<String> refinedArrayList = new ArrayList();

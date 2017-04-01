@@ -38,7 +38,6 @@ public class BudgetOverview {
     
     public void addToExpenseList(ExpenseEvent anExpenseEvent){
         getTheExpenseList().add(anExpenseEvent);
-        saveBudgetOverview();
     }
     
     public void removeFromExpenseList(ExpenseEvent anExpenseEvent){
@@ -48,7 +47,6 @@ public class BudgetOverview {
                 theExpenseList.remove(i);
             }
         }
-        saveBudgetOverview();
         
     }
     
@@ -80,7 +78,6 @@ public class BudgetOverview {
      */
     public void setThePaycheck(Paycheck thePaycheck) {
         this.thePaycheck = thePaycheck;
-        saveBudgetOverview();
 
     }
 
@@ -96,21 +93,18 @@ public class BudgetOverview {
      */
     public void setTheCategoryList(CategoryList theCategoryList) {
         this.theCategoryList = theCategoryList;
-        saveBudgetOverview();
     }
 
    
     /**
      * @param theListOfCategories the theListOfCategories to set
      */
-    public void setTheListOfCategories(ObservableList<Category> theListOfCategories) {
+    public void setTheListOfCategories(ArrayList<Category> theListOfCategories) {
         theCategoryList.setTheCategoryList(theListOfCategories);
-        saveBudgetOverview();
     }
     
     public void setDOB(LocalDate aDate){
         this.theDate = aDate;
-        saveBudgetOverview();
     }
     
     public LocalDate getDOB(){
@@ -119,7 +113,6 @@ public class BudgetOverview {
     
     public void setAccountType(String anAccountType){
         theSavingsAccountType = anAccountType;
-        saveBudgetOverview();
     }
     
     public String getAccountType(){
@@ -129,7 +122,6 @@ public class BudgetOverview {
     
     public void setLastPayDay(LocalDate aDate){
         this.theDate = aDate;
-        saveBudgetOverview();
     }
     
     public LocalDate getLastPayDay(){
@@ -148,7 +140,6 @@ public class BudgetOverview {
      */
     public void setTheExpenseList(ArrayList<ExpenseEvent> theExpenseList) {
         this.theExpenseList = theExpenseList;
-        saveBudgetOverview();
     }
     
 }

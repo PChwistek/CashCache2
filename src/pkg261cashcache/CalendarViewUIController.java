@@ -284,7 +284,7 @@ public class CalendarViewUIController implements Initializable {
     }
     
     public void initProgressBars(){
-        ObservableList<Category> theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
+        ArrayList<Category> theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
         ArrayList<ExpenseEvent> theListOfExpenses = theBudgetOverview.getTheExpenseList();
         
         double fixedCostMax = 0;

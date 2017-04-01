@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,14 +42,14 @@ public class CategoryListUIController implements Initializable {
     private CategoryList theCategoryList;
     private ObservableList<Category> theListOfCategories;
     
-    public CategoryListUIController(){
+    public CategoryListUIController(){  
     }
     
     public void setBudgetOverviewCntl(BudgetOverviewUIController aBudgetOverviewCntl){
         this.theBudgetOverviewUICntl = aBudgetOverviewCntl;
         theBudgetOverview = aBudgetOverviewCntl.getTheBudgetOverview();
         if(theBudgetOverview.getTheCategoryList() != null){
-            theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
+            theListOfCategories = FXCollections.observableArrayList(theBudgetOverview.getTheCategoryList().getTheListofCategories());
         }
     }
     
@@ -76,7 +77,7 @@ public class CategoryListUIController implements Initializable {
     public void updateCategoryUI(double anIncome){
         incomeAmount.setText("$" + anIncome);
         this.theBudgetOverview = theBudgetOverviewUICntl.getTheBudgetOverview();
-        categoryTable.setItems(theListOfCategories);
+        categoryTable.setItems(FXCollections.observableArrayList(theBudgetOverview.getTheCategoryList().getTheListofCategories()));
         fundsRemaining.setText("$" + (anIncome - calculateCurrentTotalAllocations()));
         categoryTable.refresh();   
         addCategoryButton.setDisable(false);
