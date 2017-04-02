@@ -28,6 +28,7 @@ public class BudgetOverview implements Serializable{
     private String theSavingsAccountType; 
     private ArrayList<ExpenseEvent> theExpenseList = new ArrayList();
     private ArrayList<ExpenseEvent> thePaydays = new ArrayList();
+    private ArrayList<StockItem> theStockList = new ArrayList();
     
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
@@ -159,6 +160,20 @@ public class BudgetOverview implements Serializable{
      */
     public void setTheLastPayDate(LocalDate theLastPayDate) {
         this.theLastPayDate = theLastPayDate;
+    }
+
+    /**
+     * @return the theStockList
+     */
+    public ArrayList<StockItem> getTheStockList() {
+        return theStockList;
+    }
+
+    /**
+     * @param theStockList the theStockList to set
+     */
+    public void setTheStockList(ArrayList<StockItem> theStockList) {
+        this.theStockList = theStockList;
     }
     
 }

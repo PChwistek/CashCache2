@@ -38,18 +38,17 @@ public class MarketUIController implements Initializable {
     
     private BudgetOverviewUIController theBudgetOverviewUICntl;
     
-    @FXML TableView<Stock> theStockTable;
-    @FXML TableColumn<Stock, String> tickerColumn;
-    @FXML TableColumn<Stock, String> currentPrice;
-    @FXML TableColumn<Stock, String> openingPrice;
-    @FXML TableColumn<Stock, String> percentageChange;
+    @FXML TableView<StockItem> theStockTable;
+    @FXML TableColumn<StockItem, String> tickerColumn;
+    @FXML TableColumn<StockItem, String> currentPrice;
+    @FXML TableColumn<StockItem, String> openingPrice;
+    @FXML TableColumn<StockItem, String> percentageChange;
     @FXML Label amountInSavings;
-    @FXML TextField percentGrowth;
-    @FXML ComboBox numberOfYears;
+    @FXML Label numberOfYears;
     @FXML Label futureAmount;
     
     private BudgetOverview theBudgetOverview;
-    private ArrayList<Stock> stockList = new ArrayList();
+    private ArrayList<StockItem> stockList = new ArrayList();
  
    // private Stock[] stockList = new Stock[20];
     
@@ -61,13 +60,15 @@ public class MarketUIController implements Initializable {
     public void setBudgetOverviewCntl(BudgetOverviewUIController theCntl){
         theBudgetOverviewUICntl = theCntl;
         theBudgetOverview = theBudgetOverviewUICntl.getTheBudgetOverview();
-        //initRightSide();
+        stockList = theBudgetOverview.getTheStockList();
+        initTable();
+        initRightSide();
         
         
     }
     
     public void initTable(){
-          ObservableList<Stock> stockTableList = FXCollections.observableArrayList(stockList);
+          ObservableList<StockItem> stockTableList = FXCollections.observableArrayList(stockList);
           theStockTable.setPlaceholder(new Label("Add Stock Symbols"));
           theStockTable.setItems(stockTableList);
           theStockTable.setEditable(true);
@@ -75,9 +76,9 @@ public class MarketUIController implements Initializable {
 
           
           tickerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
-          currentPrice.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQuote().getPrice().toString()));
-          openingPrice.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQuote().getOpen().toString()));
-          percentageChange.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQuote().getChange().toString()));
+          currentPrice.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrice()));
+          openingPrice.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOpen()));
+          percentageChange.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getChange()));
 
           tickerColumn.prefWidthProperty().bind(theStockTable.widthProperty().divide(4)); tickerColumn.setText("Symbol");
           currentPrice.prefWidthProperty().bind(theStockTable.widthProperty().divide(4)); currentPrice.setText("Last");
@@ -98,8 +99,9 @@ public class MarketUIController implements Initializable {
             // Traditional way to get the response value.
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()){
-                stockList.add(YahooFinance.get(result.get()));
+                stockList.add(new StockItem(YahooFinance.get(result.get()).getSymbol()));
             }
+            theBudgetOverview.setTheStockList(stockList);
             initTable();
         }catch(Exception e){
             
@@ -108,6 +110,7 @@ public class MarketUIController implements Initializable {
     
     @FXML private void handleDeleteStock(){
         stockList.remove(theStockTable.getSelectionModel().getSelectedIndex());
+        theBudgetOverview.setTheStockList(stockList);
         initTable();
     }
     
@@ -125,10 +128,7 @@ public class MarketUIController implements Initializable {
             }
         
         ObservableList yearsObservable = FXCollections.observableArrayList(years);
-        numberOfYears.setItems(yearsObservable);
-        numberOfYears.setValue(yearsObservable.get(65 - (LocalDate.now().getYear() - startAge.getYear())));
-        
-        percentGrowth.setText(".05");
+        numberOfYears.setText("" + yearsObservable.get(65 - (LocalDate.now().getYear() - startAge.getYear())));
         
         for(int i = 0; i < categories.size(); i++){
             if(categories.get(i).isIsRetirement()== true){
@@ -137,15 +137,15 @@ public class MarketUIController implements Initializable {
             }
         }
         
-        amountInSavings.setText("" + savings);
+        amountInSavings.setText("$" + savings);
         
         double future = 0;
         
-        for(int i = 0; i < Integer.parseInt(numberOfYears.getValue().toString()); i++){
-            savings = savings * Double.parseDouble(percentGrowth.getText());
+        for(int i = 0; i < Integer.parseInt(numberOfYears.getText()); i++){
+            savings += savings * .05;
         }
         
-        futureAmount.setText("" + savings);
+        futureAmount.setText("$" + Math.round(savings));
     }
     
 }
