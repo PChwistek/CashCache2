@@ -27,6 +27,10 @@ public class BudgetOverview {
     private ArrayList<ExpenseEvent> thePaydays = new ArrayList();
     private PersistentDataController theDataCntl = new PersistentDataController();
     
+    public BudgetOverview(){
+        
+    }
+    
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
         theCategoryList = aCategoryList;
@@ -113,6 +117,7 @@ public class BudgetOverview {
     
     public void setAccountType(String anAccountType){
         theSavingsAccountType = anAccountType;
+       // saveBudgetOverview();
     }
     
     public String getAccountType(){

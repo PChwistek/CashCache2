@@ -69,13 +69,19 @@ public class CreateCategoryUIController implements Initializable {
     private void handleCreate(){
         try{
             String name = null;
+            boolean isRetired = false;
             if(categoryName.getText().equals("") == false){
                  name = categoryName.getText();
             } else {
                 throw new Exception();
             }
             String type = categoryTypeDropDown.getValue().toString();
-            Category aCategory = new Category(0, name, type);
+            
+            if(retirementBox.isDisabled() == false && retirementBox.getValue().equals(1)){
+                isRetired = true;
+            }
+            
+            Category aCategory = new Category(0, name, type, isRetired);
             theBudgetOverviewCntl.createCategory(aCategory);
         }catch(Exception e){
             e.printStackTrace();

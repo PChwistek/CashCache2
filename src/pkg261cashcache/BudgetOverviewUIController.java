@@ -50,8 +50,15 @@ public class BudgetOverviewUIController implements Initializable {
     private PersistentDataController theDataCntl;
  
     public BudgetOverviewUIController(){
+        theDataCntl = new PersistentDataController();
         theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(LocalDate.now(), 0));
-        theBudgetOverview.getThePaycheck().setFrequency(1);
+            theBudgetOverview.getThePaycheck().setFrequency(1);
+        /*try{
+            theDataCntl.importList();
+        }catch(Exception e){
+            theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(LocalDate.now(), 0));
+            theBudgetOverview.getThePaycheck().setFrequency(1);
+        }*/
     
         
     }
@@ -154,8 +161,8 @@ public class BudgetOverviewUIController implements Initializable {
 
     public void setBudgetOverview(BudgetOverview aBudgetOverview){
         this.theBudgetOverview = aBudgetOverview;
-        PersistentDataController persistentController = new PersistentDataController();
-        persistentController.exportList(aBudgetOverview);
+        //theDataCntl.exportList(aBudgetOverview);
+       
     }
 
     //RIGHT PANEL CODE ===============================================================================================================//

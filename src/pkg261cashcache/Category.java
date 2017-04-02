@@ -23,16 +23,18 @@ public class Category {
     private static int idCount = 1;
     private double allowance;
     private StringProperty categoryTitle;
+    private boolean isRetirement;
     private String categoryName;
     private String categoryType;
     
-    public Category(double anAllowance, String aTitle, String aCategoryType){
+    public Category(double anAllowance, String aTitle, String aCategoryType, boolean retire){
         allowance = anAllowance;
         categoryName = aTitle;
         categoryTitle = new SimpleStringProperty(aTitle);
         categoryType = aCategoryType;
         idNum = idCount;
         idCount++;
+        isRetirement = retire;
     }
 
     /**
@@ -111,6 +113,20 @@ public class Category {
      */
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    /**
+     * @return the isRetirement
+     */
+    public boolean isIsRetirement() {
+        return isRetirement;
+    }
+
+    /**
+     * @param isRetirement the isRetirement to set
+     */
+    public void setIsRetirement(boolean isRetirement) {
+        this.isRetirement = isRetirement;
     }
         
 }
