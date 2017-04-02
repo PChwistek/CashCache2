@@ -6,6 +6,7 @@
 package pkg261cashcache;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
@@ -17,28 +18,25 @@ import yahoofinance.YahooFinance;
  *
  * @author Phil
  */
-public class BudgetOverview {
+public class BudgetOverview implements Serializable{
     
     private Paycheck thePaycheck;
     private CategoryList theCategoryList;
     private LocalDate theDate;
+    private LocalDate theLastPayDate;
+    private LocalDate DOB;
     private String theSavingsAccountType; 
     private ArrayList<ExpenseEvent> theExpenseList = new ArrayList();
     private ArrayList<ExpenseEvent> thePaydays = new ArrayList();
-    private PersistentDataController theDataCntl = new PersistentDataController();
     
     public BudgetOverview(CategoryList aCategoryList, Paycheck aPaycheck){
         thePaycheck = aPaycheck;
         theCategoryList = aCategoryList;
     }
     
-    public void saveBudgetOverview(){
-        theDataCntl.exportList(this);
-    }
     
     public void addToExpenseList(ExpenseEvent anExpenseEvent){
         getTheExpenseList().add(anExpenseEvent);
-        saveBudgetOverview();
     }
     
     public void removeFromExpenseList(ExpenseEvent anExpenseEvent){
@@ -48,7 +46,6 @@ public class BudgetOverview {
                 theExpenseList.remove(i);
             }
         }
-        saveBudgetOverview();
         
     }
     
@@ -80,7 +77,6 @@ public class BudgetOverview {
      */
     public void setThePaycheck(Paycheck thePaycheck) {
         this.thePaycheck = thePaycheck;
-        saveBudgetOverview();
 
     }
 
@@ -96,30 +92,26 @@ public class BudgetOverview {
      */
     public void setTheCategoryList(CategoryList theCategoryList) {
         this.theCategoryList = theCategoryList;
-        saveBudgetOverview();
     }
 
    
     /**
      * @param theListOfCategories the theListOfCategories to set
      */
-    public void setTheListOfCategories(ObservableList<Category> theListOfCategories) {
+    public void setTheListOfCategories(ArrayList<Category> theListOfCategories) {
         theCategoryList.setTheCategoryList(theListOfCategories);
-        saveBudgetOverview();
     }
     
     public void setDOB(LocalDate aDate){
-        this.theDate = aDate;
-        saveBudgetOverview();
+        this.setTheDate(aDate);
     }
     
     public LocalDate getDOB(){
-        return this.theDate;
+        return this.getTheDate();
     }
     
     public void setAccountType(String anAccountType){
         theSavingsAccountType = anAccountType;
-        saveBudgetOverview();
     }
     
     public String getAccountType(){
@@ -127,15 +119,6 @@ public class BudgetOverview {
         
     }
     
-    public void setLastPayDay(LocalDate aDate){
-        this.theDate = aDate;
-        saveBudgetOverview();
-    }
-    
-    public LocalDate getLastPayDay(){
-        return this.theDate;
-    }
-
     /**
      * @return the theExpenseList
      */
@@ -148,7 +131,34 @@ public class BudgetOverview {
      */
     public void setTheExpenseList(ArrayList<ExpenseEvent> theExpenseList) {
         this.theExpenseList = theExpenseList;
-        saveBudgetOverview();
+    }
+
+    /**
+     * @return the theDate
+     */
+    public LocalDate getTheDate() {
+        return theDate;
+    }
+
+    /**
+     * @param theDate the theDate to set
+     */
+    public void setTheDate(LocalDate theDate) {
+        this.theDate = theDate;
+    }
+
+    /**
+     * @return the theLastPayDate
+     */
+    public LocalDate getTheLastPayDate() {
+        return theLastPayDate;
+    }
+
+    /**
+     * @param theLastPayDate the theLastPayDate to set
+     */
+    public void setTheLastPayDate(LocalDate theLastPayDate) {
+        this.theLastPayDate = theLastPayDate;
     }
     
 }

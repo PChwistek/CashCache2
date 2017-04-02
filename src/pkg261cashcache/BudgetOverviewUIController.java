@@ -8,6 +8,7 @@ package pkg261cashcache;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -46,11 +47,16 @@ public class BudgetOverviewUIController implements Initializable {
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
-    private PersistentDataController theDataCntl;
- 
+    private PersistantDataController theDataCntl; 
+    
     public BudgetOverviewUIController(){
-        theBudgetOverview = new BudgetOverview(new CategoryList(0.0), new Paycheck(LocalDate.now(), 0));
-        theBudgetOverview.getThePaycheck().setFrequency(1);
+        
+        try{
+            theDataCntl = PersistantDataController.getSerializedDataCntl();
+            theBudgetOverview = theDataCntl.getSerializedDataModel();
+        }catch(Exception e){
+           e.printStackTrace();
+        }
     
         
     }
@@ -116,6 +122,7 @@ public class BudgetOverviewUIController implements Initializable {
     public void updateCategoryUI(){
         categoryListUIController.updateCategoryUI(this.getMonthlyIncome());
         
+        
     }
     
     public Double getMonthlyIncome(){
@@ -153,8 +160,8 @@ public class BudgetOverviewUIController implements Initializable {
 
     public void setBudgetOverview(BudgetOverview aBudgetOverview){
         this.theBudgetOverview = aBudgetOverview;
-        PersistentDataController persistentController = new PersistentDataController();
-        persistentController.exportList(aBudgetOverview);
+        theDataCntl.writeSerializedDataFile(theBudgetOverview);
+       
     }
 
     //RIGHT PANEL CODE ===============================================================================================================//
@@ -198,7 +205,7 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public void deleteItem(Category cat){
-        ObservableList<Category> theList = theBudgetOverview.getTheCategoryList().getTheListofCategories();
+        ArrayList<Category> theList = theBudgetOverview.getTheCategoryList().getTheListofCategories();
         int listSize = theList.size();
         for(int i = 0; i < listSize ; i++){
             if(theList.get(i).isEqual(cat)){

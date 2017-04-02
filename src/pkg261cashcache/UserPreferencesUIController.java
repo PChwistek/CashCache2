@@ -69,7 +69,7 @@ public class UserPreferencesUIController implements Initializable {
         incomeTextField.setText("" + paycheck.getCheckAmount());
         paycheckFrequency.setValue(paycheckFrequencyList.get(theBudgetOverview.getThePaycheck().getFrequency()));
         dobPicker.setValue(theBudgetOverview.getDOB());
-        lastCheckPicker.setValue(theBudgetOverview.getLastPayDay());
+        lastCheckPicker.setValue(theBudgetOverview.getTheLastPayDate());
         retirementType.setValue(theBudgetOverview.getAccountType());
     }
     
@@ -110,7 +110,7 @@ public class UserPreferencesUIController implements Initializable {
             paycheck.nextPaychecks(lastCheckPicker.getValue(), frequency);
             theBudgetOverview.setThePaycheck(paycheck);
             theBudgetOverview.setDOB(dobPicker.getValue());
-            theBudgetOverview.setLastPayDay(lastCheckPicker.getValue());
+            theBudgetOverview.setTheLastPayDate(lastCheckPicker.getValue());
             theBudgetOverview.setAccountType(savingsType);
             theBudgetOverviewCntl.setBudgetOverview(theBudgetOverview);
             theBudgetOverviewCntl.updateCategoryUI();

@@ -23,7 +23,7 @@ public class Main extends Application {
     private Stage primaryStage;
     private AnchorPane rootLayout;
     private AnchorPane categoryListLayout;
-    private PersistentDataController theDataCntl;
+    private PersistantDataController theDataCntl;
     private BudgetOverviewUIController theBudgetOverviewCntl;
     
     

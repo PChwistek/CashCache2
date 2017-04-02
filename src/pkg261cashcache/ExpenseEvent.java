@@ -5,6 +5,7 @@
  */
 package pkg261cashcache;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -16,7 +17,7 @@ import javafx.beans.value.ObservableValue;
  *
  * @author Philz zee Kill
  */
-public class ExpenseEvent {
+public class ExpenseEvent implements Serializable {
     
     private String category;
     private String eventTitle;

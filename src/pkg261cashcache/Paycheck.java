@@ -5,6 +5,7 @@
  */
 package pkg261cashcache;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,7 @@ import javafx.beans.property.SimpleDoubleProperty;
  *
  * @author Phil
  */
-public class Paycheck {
+public class Paycheck implements Serializable {
     
     private LocalDate payDay;
     private double checkAmount;

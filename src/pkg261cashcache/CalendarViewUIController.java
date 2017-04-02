@@ -252,7 +252,7 @@ public class CalendarViewUIController implements Initializable {
         
         ArrayList<ExpenseEvent> theListOfEvents = theBudgetOverview.getTheExpenseList();
         ArrayList<LocalDate> thePaydays = theBudgetOverview.getThePaycheck().getTheListOfPaychecks();
-        LocalDate payDay = theBudgetOverview.getLastPayDay();
+        LocalDate payDay = theBudgetOverview.getTheLastPayDate();
         setSelectedDate(calendar.getValue());
         
         
@@ -284,7 +284,7 @@ public class CalendarViewUIController implements Initializable {
     }
     
     public void initProgressBars(){
-        ObservableList<Category> theListOfCategories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
+        ObservableList<Category> theListOfCategories = FXCollections.observableArrayList(theBudgetOverview.getTheCategoryList().getTheListofCategories());
         ArrayList<ExpenseEvent> theListOfExpenses = theBudgetOverview.getTheExpenseList();
         
         double fixedCostMax = 0;

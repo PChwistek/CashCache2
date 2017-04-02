@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pkg261cashcache;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
@@ -13,9 +14,9 @@ import javafx.collections.ObservableList;
  *
  * @author Phil
  */
-public class CategoryList {
+public class CategoryList implements Serializable{
     
-    private ObservableList <Category> theCategoryList = FXCollections.observableArrayList();
+    private ArrayList <Category> theCategoryList = new ArrayList();
 
     private Paycheck income;
     
@@ -23,12 +24,12 @@ public class CategoryList {
         income = new Paycheck(LocalDate.now(), anIncome);
     }
     
-    public void setTheCategoryList(ObservableList<Category> aCategoryList){
+    public void setTheCategoryList(ArrayList<Category> aCategoryList){
         theCategoryList = aCategoryList;
     }
     
-    public ObservableList<Category> getTheListofCategories(){
-        return getTheCategoryList();
+    public ArrayList<Category> getTheListofCategories(){
+        return theCategoryList;
     }
     
     public void populateDefaultCategoryList(){
@@ -53,10 +54,6 @@ public class CategoryList {
     /**
      * @return the theCategoryList
      */
-    public ObservableList <Category> getTheCategoryList() {
-        return theCategoryList;
-    }
-
     /**
      * @return the income
      */

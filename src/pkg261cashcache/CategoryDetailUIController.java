@@ -82,7 +82,7 @@ public class CategoryDetailUIController implements Initializable {
     
     public void setAllowance(){
         try{
-            ObservableList<Category> theList = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
+            ObservableList<Category> theList = FXCollections.observableArrayList(theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories());
             int listSize = theList.size();
             
             for(int i = 0; i < listSize ; i++){
@@ -109,6 +109,9 @@ public class CategoryDetailUIController implements Initializable {
         theCategoryAllowance.setText("" + Math.round(allowanceSlider.getValue()));
         setAllowance();
         setUserAllocationChart();
+    }
+    
+    @FXML private void handleSliderUpdate(){
         theBudgetOverviewCntl.updateCategoryUI();
     }
     
@@ -129,7 +132,7 @@ public class CategoryDetailUIController implements Initializable {
     }
     
     private void setUserAllocationChart(){ //user chart data
-        ObservableList<Category> theListOfCategories = theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories();
+        ObservableList<Category> theListOfCategories = FXCollections.observableArrayList(theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories());
         double fixedCostAllowance = 0;
         double flexSpendingAllowance = 0;
         double savingsAllowance = 0;
