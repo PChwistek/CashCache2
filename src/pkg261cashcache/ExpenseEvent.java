@@ -23,8 +23,8 @@ public class ExpenseEvent implements Serializable {
     private String eventTitle;
     private String categoryType;
     private LocalDate theDate;
-    private StringProperty categoryProperty;
-    private StringProperty eventTitleProperty;
+    private String categoryProperty;
+    private String eventTitleProperty;
     private double expenseAmount;
     
     public ExpenseEvent(String aCategory, String aCategoryType, String anEventTitle, double anExpenseAmount, LocalDate aDate){
@@ -32,8 +32,8 @@ public class ExpenseEvent implements Serializable {
         this.categoryType = aCategoryType;
         this.eventTitle = anEventTitle;
         this.expenseAmount = anExpenseAmount;
-        this.categoryProperty = new SimpleStringProperty(aCategory);
-        this.eventTitleProperty = new SimpleStringProperty(anEventTitle);
+        this.categoryProperty = aCategory;
+        this.eventTitleProperty = anEventTitle;
         this.theDate= aDate;
     }
     
@@ -100,28 +100,28 @@ public class ExpenseEvent implements Serializable {
      * @return the categoryProperty
      */
     public StringProperty getCategoryProperty() {
-        return categoryProperty;
+        return new SimpleStringProperty(categoryProperty);
     }
 
     /**
      * @param categoryProperty the categoryProperty to set
      */
     public void setCategoryProperty(StringProperty categoryProperty) {
-        this.categoryProperty = categoryProperty;
+        this.categoryProperty = categoryProperty.getValue();
     }
 
     /**
      * @return the eventTitleProperty
      */
     public StringProperty getEventTitleProperty() {
-        return eventTitleProperty;
+        return new SimpleStringProperty(eventTitleProperty);
     }
 
     /**
      * @param eventTitleProperty the eventTitleProperty to set
      */
     public void setEventTitleProperty(StringProperty eventTitleProperty) {
-        this.eventTitleProperty = eventTitleProperty;
+        this.eventTitleProperty = eventTitleProperty.getValue();
     }
 
     /**

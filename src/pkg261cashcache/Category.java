@@ -23,7 +23,7 @@ public class Category implements Serializable {
     private Integer idNum; // would this end up being static? 
     private static int idCount = 1;
     private double allowance;
-    private StringProperty categoryTitle;
+    private String categoryTitle;
     private boolean isRetirement;
     private String categoryName;
     private String categoryType;
@@ -31,7 +31,7 @@ public class Category implements Serializable {
     public Category(double anAllowance, String aTitle, String aCategoryType, boolean retire){
         allowance = anAllowance;
         categoryName = aTitle;
-        categoryTitle = new SimpleStringProperty(aTitle);
+        categoryTitle = aTitle;
         categoryType = aCategoryType;
         idNum = idCount;
         idCount++;
@@ -71,14 +71,14 @@ public class Category implements Serializable {
      * @return the categoryTitle
      */
     public StringProperty getCategoryTitle() {
-        return categoryTitle;
+        return new SimpleStringProperty(categoryTitle);
     }
 
     /**
      * @param categoryTitle the categoryTitle to set
      */
     public void setCategoryTitle(StringProperty categoryTitle) {
-        this.categoryTitle = categoryTitle;
+        this.categoryTitle = categoryTitle.getValue();
     }
 
     /**

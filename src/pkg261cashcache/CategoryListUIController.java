@@ -51,6 +51,14 @@ public class CategoryListUIController implements Initializable {
         if(theBudgetOverview.getTheCategoryList() != null){
             theListOfCategories = FXCollections.observableArrayList(theBudgetOverview.getTheCategoryList().getTheListofCategories());
         }
+        
+        theBudgetOverview = PersistantDataController.getSerializedDataCntl().getSerializedDataModel();
+        if(theBudgetOverview.getThePaycheck().getCheckAmount() > 0.0){
+            updateCategoryUI(getMonthlyIncome());
+        } else {
+            incomeAmount.setText("$0");
+            fundsRemaining.setText("$0");
+        }
     }
     
     private void initCategoryTable(){
@@ -68,8 +76,7 @@ public class CategoryListUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        incomeAmount.setText("$0");
-        fundsRemaining.setText("$0");
+        
         initCategoryTable();
         categoryTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCategoryDetails(newValue));
     }
@@ -82,11 +89,11 @@ public class CategoryListUIController implements Initializable {
         categoryTable.refresh();   
         addCategoryButton.setDisable(false);
         
+        
     }
     
     public void updateFundsRemaining(){
-                fundsRemaining.setText("$" + (theBudgetOverviewUICntl.calculateRemainingFunds()));
-
+        fundsRemaining.setText("$" + (theBudgetOverviewUICntl.calculateRemainingFunds()));
     }
     
     public double calculateCurrentTotalAllocations(){
@@ -114,6 +121,18 @@ public class CategoryListUIController implements Initializable {
     public void clearSelections(){
         categoryTable.getSelectionModel().clearSelection();
         categoryTable.refresh();
+    }
+    
+    public Double getMonthlyIncome(){
+        int aFrequency = 1;
+        if(theBudgetOverview.getThePaycheck().getFrequency() == 0){
+            aFrequency = 4;
+        } else if (theBudgetOverview.getThePaycheck().getFrequency() == 1){
+            aFrequency = 2;
+        } else {
+            aFrequency = 1;
+        }
+        return theBudgetOverview.getThePaycheck().getCheckAmount()* aFrequency;
     }
     
 }

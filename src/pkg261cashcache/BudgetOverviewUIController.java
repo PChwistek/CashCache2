@@ -64,6 +64,9 @@ public class BudgetOverviewUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getCategoryListUIController().setBudgetOverviewCntl(this);
+          if(theBudgetOverview.getTheExpenseList().isEmpty() == false || theBudgetOverview.getTheCategoryList().getTheListofCategories().isEmpty() == false){
+                theCalendarButton.setDisable(false);
+          }
     }    
     
     @FXML
@@ -207,7 +210,7 @@ public class BudgetOverviewUIController implements Initializable {
     public void deleteItem(Category cat){
         ArrayList<Category> theList = theBudgetOverview.getTheCategoryList().getTheListofCategories();
         int listSize = theList.size();
-        for(int i = 0; i < listSize ; i++){
+        for(int i = 0; i < listSize; i++){
             if(theList.get(i).isEqual(cat)){
                 theList.remove(i);
             }
@@ -215,6 +218,10 @@ public class BudgetOverviewUIController implements Initializable {
         theBudgetOverview.setTheListOfCategories(theList);
         updateCategoryUI();
         categoryDetailUIPanel.getChildren().clear();
+    }
+    
+    public void saveBudgetOverview(){
+        theDataCntl.writeSerializedDataFile(theBudgetOverview);
     }
 
     /**

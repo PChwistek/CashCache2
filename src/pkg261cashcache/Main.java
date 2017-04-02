@@ -43,7 +43,7 @@ public class Main extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-          
+            primaryStage.setOnCloseRequest(event ->{ theBudgetOverviewCntl.saveBudgetOverview();});
             
         } catch (IOException e){
              e.printStackTrace();
