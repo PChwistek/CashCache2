@@ -63,7 +63,7 @@ public class BudgetOverviewUIController implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categoryListUIController.setBudgetOverviewCntl(this);
+        getCategoryListUIController().setBudgetOverviewCntl(this);
     }    
     
     @FXML
@@ -95,7 +95,7 @@ public class BudgetOverviewUIController implements Initializable {
             categoryDetailUIPanel.getChildren().add(loader.load());
             theMarketCntl = loader.getController();
             theMarketCntl.setBudgetOverviewCntl(this);
-            categoryListUIController.clearSelections();
+            getCategoryListUIController().clearSelections();
 
         } catch(IOException e){
             e.printStackTrace();
@@ -112,7 +112,7 @@ public class BudgetOverviewUIController implements Initializable {
             categoryDetailUIPanel.getChildren().add(loader.load());
             calendarUICntl = loader.getController();
             calendarUICntl.setBudgetOverviewCntl(this);
-            categoryListUIController.clearSelections();
+            getCategoryListUIController().clearSelections();
 
         } catch(IOException e){
             e.printStackTrace();
@@ -120,7 +120,7 @@ public class BudgetOverviewUIController implements Initializable {
     }
     
     public void updateCategoryUI(){
-        categoryListUIController.updateCategoryUI(this.getMonthlyIncome());
+        getCategoryListUIController().updateCategoryUI(this.getMonthlyIncome());
         
         
     }
@@ -215,6 +215,20 @@ public class BudgetOverviewUIController implements Initializable {
         theBudgetOverview.setTheListOfCategories(theList);
         updateCategoryUI();
         categoryDetailUIPanel.getChildren().clear();
+    }
+
+    /**
+     * @return the categoryListUIController
+     */
+    public CategoryListUIController getCategoryListUIController() {
+        return categoryListUIController;
+    }
+
+    /**
+     * @param categoryListUIController the categoryListUIController to set
+     */
+    public void setCategoryListUIController(CategoryListUIController categoryListUIController) {
+        this.categoryListUIController = categoryListUIController;
     }
     
     

@@ -84,6 +84,11 @@ public class CategoryListUIController implements Initializable {
         
     }
     
+    public void updateFundsRemaining(){
+                fundsRemaining.setText("$" + (theBudgetOverviewUICntl.calculateRemainingFunds()));
+
+    }
+    
     public double calculateCurrentTotalAllocations(){
         double funds = 0;
         if(theListOfCategories != null){

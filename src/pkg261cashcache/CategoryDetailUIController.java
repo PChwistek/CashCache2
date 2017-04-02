@@ -112,7 +112,8 @@ public class CategoryDetailUIController implements Initializable {
     }
     
     @FXML private void handleSliderUpdate(){
-        theBudgetOverviewCntl.updateCategoryUI();
+        theBudgetOverviewCntl.getCategoryListUIController().clearSelections();
+        theBudgetOverviewCntl.getCategoryListUIController().updateFundsRemaining();
     }
     
     @FXML private void handleAllowanceTextField(){ // lots of defensive programming here

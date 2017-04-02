@@ -148,4 +148,65 @@ public class MarketUIController implements Initializable {
         futureAmount.setText("" + savings);
     }
     
+    
+    @FXML private void handleAddStock(){
+        try{
+            TextInputDialog dialog = new TextInputDialog("Add Stock");
+            dialog.setTitle("Add Stock");
+            dialog.setHeaderText("Add a stock price to the list");
+            dialog.setContentText("Please Enter a stock ticker symbol");
+
+            // Traditional way to get the response value.
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()){
+                stockList.add(YahooFinance.get(result.get()));
+            }
+            initTable();
+        }catch(Exception e){
+            
+        }
+    }
+    
+    @FXML private void handleDeleteStock(){
+        stockList.remove(theStockTable.getSelectionModel().getSelectedIndex());
+        initTable();
+    }
+    
+    
+    
+    
+    public void initRightSide(){
+        ArrayList<Integer> years = new ArrayList();
+        ArrayList<Category> categories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
+        double savings = 0.0;
+        LocalDate startAge = theBudgetOverview.getDOB();
+        System.out.println(startAge.getYear());
+        for(int i =0; i < 100; i++){
+                years.add(i);
+            }
+        
+        ObservableList yearsObservable = FXCollections.observableArrayList(years);
+        numberOfYears.setItems(yearsObservable);
+        numberOfYears.setValue(yearsObservable.get(65 - (LocalDate.now().getYear() - startAge.getYear())));
+        
+        percentGrowth.setText(".05");
+        
+        for(int i = 0; i < categories.size(); i++){
+            if(categories.get(i).isIsRetirement()== true){
+                savings += categories.get(i).getAllowanceProperty().getValue();
+                System.out.print(savings);
+            }
+        }
+        
+        amountInSavings.setText("" + savings);
+        
+        double future = 0;
+        
+        for(int i = 0; i < Integer.parseInt(numberOfYears.getValue().toString()); i++){
+            savings = savings * Double.parseDouble(percentGrowth.getText());
+        }
+        
+        futureAmount.setText("" + savings);
+    }
+    
 }
