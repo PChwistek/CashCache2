@@ -1,25 +1,20 @@
 package pkg261cashcache;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
-public class PersistantDataController {
+public class PersistentDataController {
 
     private final String THE_SERIALIZED_DATA_FILE_NAME = "serializedData.ser";
     private final String EXTERNAL_DATA_PATH = "";
     private BudgetOverview theSerializedDataModel = null;
-    private static PersistantDataController thePersistantDataCntl;
+    private static PersistentDataController thePersistantDataCntl;
 
-    private PersistantDataController() {
+    private PersistentDataController() {
         System.out.println("created");
 
         this.readSerializedDataFile();
@@ -31,9 +26,9 @@ public class PersistantDataController {
         }
     }
 
-    public static PersistantDataController getSerializedDataCntl() {
+    public static PersistentDataController getSerializedDataCntl() {
         if (thePersistantDataCntl == null) {
-            thePersistantDataCntl = new PersistantDataController();
+            thePersistantDataCntl = new PersistentDataController();
         }
         return thePersistantDataCntl;
     }

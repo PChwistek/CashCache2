@@ -23,7 +23,7 @@ public class Main extends Application {
     private Stage primaryStage;
     private AnchorPane rootLayout;
     private AnchorPane categoryListLayout;
-    private PersistantDataController theDataCntl;
+    private PersistentDataController theDataCntl;
     private BudgetOverviewUIController theBudgetOverviewCntl;
     
     
@@ -43,7 +43,7 @@ public class Main extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-            primaryStage.setOnCloseRequest(event ->{ theBudgetOverviewCntl.saveBudgetOverview();});
+            primaryStage.setOnCloseRequest(event -> { theBudgetOverviewCntl.saveBudgetOverview();});
             
         } catch (IOException e){
              e.printStackTrace();

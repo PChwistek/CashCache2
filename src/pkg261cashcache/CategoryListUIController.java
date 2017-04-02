@@ -52,7 +52,7 @@ public class CategoryListUIController implements Initializable {
             theListOfCategories = FXCollections.observableArrayList(theBudgetOverview.getTheCategoryList().getTheListofCategories());
         }
         
-        theBudgetOverview = PersistantDataController.getSerializedDataCntl().getSerializedDataModel();
+        theBudgetOverview = PersistentDataController.getSerializedDataCntl().getSerializedDataModel();
         if(theBudgetOverview.getThePaycheck().getCheckAmount() > 0.0){
             updateCategoryUI(getMonthlyIncome());
         } else {

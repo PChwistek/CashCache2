@@ -47,12 +47,12 @@ public class BudgetOverviewUIController implements Initializable {
     private AnchorPane userPreferencesUI;
     private static BudgetOverview theBudgetOverview;
     private UserPreferencesUIController userPrefCntl;
-    private PersistantDataController theDataCntl; 
+    private PersistentDataController theDataCntl; 
     
     public BudgetOverviewUIController(){
         
         try{
-            theDataCntl = PersistantDataController.getSerializedDataCntl();
+            theDataCntl = PersistentDataController.getSerializedDataCntl();
             theBudgetOverview = theDataCntl.getSerializedDataModel();
         }catch(Exception e){
            e.printStackTrace();
