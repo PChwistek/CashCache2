@@ -114,7 +114,6 @@ public class UserPreferencesUIController implements Initializable {
             theBudgetOverview.setAccountType(savingsType);
             theBudgetOverviewCntl.setBudgetOverview(theBudgetOverview);
             theBudgetOverviewCntl.updateCategoryUI();
-            theBudgetOverviewCntl.closeRightPanel();
             theBudgetOverviewCntl.closePreferences();
             
         } catch (Exception e){

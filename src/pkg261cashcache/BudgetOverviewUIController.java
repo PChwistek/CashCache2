@@ -38,6 +38,7 @@ public class BudgetOverviewUIController implements Initializable {
     @FXML private Button theMarketButton;
     @FXML private AnchorPane categoryListUI;
     @FXML private AnchorPane categoryDetailUIPanel;
+    @FXML private AnchorPane logoPanel;
     @FXML private CategoryListUIController categoryListUIController;
     private CreateCategoryUIController createCatCntl;
     private CategoryDetailUIController catDetailCntl;
@@ -50,6 +51,8 @@ public class BudgetOverviewUIController implements Initializable {
     private PersistentDataController theDataCntl; 
     
     public BudgetOverviewUIController(){
+                
+        logoPanel = new AnchorPane();
         
         try{
             theDataCntl = PersistentDataController.getSerializedDataCntl();
@@ -58,15 +61,19 @@ public class BudgetOverviewUIController implements Initializable {
            e.printStackTrace();
         }
     
-        
     }
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         getCategoryListUIController().setBudgetOverviewCntl(this);
           if(theBudgetOverview.getTheExpenseList().isEmpty() == false || theBudgetOverview.getTheCategoryList().getTheListofCategories().isEmpty() == false){
                 theCalendarButton.setDisable(false);
           }
+          
+        logoPanel.getChildren().setAll(categoryDetailUIPanel.getChildren());
+        categoryDetailUIPanel.getChildren().add(logoPanel);
+
     }    
     
     @FXML
@@ -190,6 +197,7 @@ public class BudgetOverviewUIController implements Initializable {
     
     public void closeRightPanel(){
         categoryDetailUIPanel.getChildren().clear();
+        categoryDetailUIPanel.getChildren().add(logoPanel);
     }
     
     public void setDetailViewCategoryUI(Category aCat){
@@ -217,7 +225,7 @@ public class BudgetOverviewUIController implements Initializable {
         }
         theBudgetOverview.setTheListOfCategories(theList);
         updateCategoryUI();
-        categoryDetailUIPanel.getChildren().clear();
+        closeRightPanel();
     }
     
     public void saveBudgetOverview(){
