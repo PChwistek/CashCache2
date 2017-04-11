@@ -327,13 +327,22 @@ public class CalendarViewUIController implements Initializable {
             }
         }
         
-        fixedCostBar.setProgress(currentFixedExpense/fixedCostMax);
-        flexSpendBar.setProgress(currentFlexExpense/flexCostMax);
-        savingsBar.setProgress(currentSavingsExpense/savingsMax);
         
-        fixedCostPercentage.setText( (Math.round(100 * (currentFixedExpense/fixedCostMax))) + "%");
-        flexSpenPercentage.setText((Math.round(100 * (currentFlexExpense/flexCostMax))) + "%");
-        savingsPercentage.setText((Math.round( 100 * (currentSavingsExpense/savingsMax))) + "%");
+        
+        if (fixedCostMax > 0) {
+            fixedCostPercentage.setText( (Math.round(100 * (currentFixedExpense/fixedCostMax))) + "%");
+            fixedCostBar.setProgress(currentFixedExpense/fixedCostMax);
+        }
+        
+        if (flexCostMax > 0) {
+            flexSpenPercentage.setText((Math.round(100 * (currentFlexExpense/flexCostMax))) + "%");
+            flexSpendBar.setProgress(currentFlexExpense/flexCostMax);
+        }
+       
+        if (savingsMax > 0) {
+            savingsPercentage.setText((Math.round( 100 * (currentSavingsExpense/savingsMax))) + "%");
+            savingsBar.setProgress(currentSavingsExpense/savingsMax);
+        }
         
         
     }

@@ -118,10 +118,14 @@ public class CategoryDetailUIController implements Initializable {
     
     @FXML private void handleAllowanceTextField(){ // lots of defensive programming here
         try{
-            setAllowance();
-            setUserAllocationChart();
-            theBudgetOverviewCntl.updateCategoryUI();
-            allowanceSlider.setValue(Double.parseDouble(theCategoryAllowance.getText()));
+            if (Double.parseDouble(theCategoryAllowance.getText()) < theBudgetOverviewCntl.getMonthlyIncome()) {
+                setAllowance();
+                setUserAllocationChart();
+                theBudgetOverviewCntl.updateCategoryUI();
+                allowanceSlider.setValue(Double.parseDouble(theCategoryAllowance.getText()));
+            } else {
+                throw new Exception();
+            }
         } catch(Exception e){
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

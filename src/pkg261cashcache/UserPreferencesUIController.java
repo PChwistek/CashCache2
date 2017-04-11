@@ -81,41 +81,50 @@ public class UserPreferencesUIController implements Initializable {
     @FXML
     public void handleSave(){
         try{
-            if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(0))){
-                frequency = 0;
-            } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(2))){
-                frequency = 2;
-            } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(1))){
-                frequency = 1;
+            if (Double.parseDouble(incomeTextField.getText()) > theBudgetOverviewCntl.getMonthlyIncome()) {
+                if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(0))){
+                    frequency = 0;
+                } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(2))){
+                    frequency = 2;
+                } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(1))){
+                    frequency = 1;
+                }
+
+
+                if (retirementType.getValue().equals(retirementTypeList.get(0))){
+                    savingsType = "401(k)";
+                } else if (retirementType.getValue().equals(retirementTypeList.get(1))){
+                    savingsType = "403(b)";
+                } else if (retirementType.getValue().equals(retirementTypeList.get(2))){
+                    savingsType = "IRA";
+                } else if (retirementType.getValue().equals(retirementTypeList.get(3))){
+                    savingsType = "Roth IRA";
+                } else if (retirementType.getValue().equals(retirementTypeList.get(4))){
+                    savingsType = "Solo 401(k)";
+                } else if (retirementType.getValue().equals(retirementTypeList.get(5))){
+                    savingsType = "None";
+                } 
+
+                paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
+                paycheck.setPayDay(lastCheckPicker.getValue());
+                paycheck.setFrequency(frequency);
+                paycheck.nextPaychecks(lastCheckPicker.getValue(), frequency);
+                theBudgetOverview.setThePaycheck(paycheck);
+                theBudgetOverview.setDOB(dobPicker.getValue());
+                theBudgetOverview.setTheLastPayDate(lastCheckPicker.getValue());
+                theBudgetOverview.setAccountType(savingsType);
+                theBudgetOverviewCntl.setBudgetOverview(theBudgetOverview);
+                theBudgetOverviewCntl.updateCategoryUI();
+                theBudgetOverviewCntl.closePreferences();
+                
+            } else {
+                Alert payAlert = new Alert(AlertType.INFORMATION);
+                payAlert.setTitle("Incorrect Input");
+                payAlert.setHeaderText("Paycheck amount error");
+                payAlert.setContentText("Make sure that your paycheck remains larger than your total expenses");
+                payAlert.showAndWait();
+            
             }
-            
-            
-            if (retirementType.getValue().equals(retirementTypeList.get(0))){
-                savingsType = "401(k)";
-            } else if (retirementType.getValue().equals(retirementTypeList.get(1))){
-                savingsType = "403(b)";
-            } else if (retirementType.getValue().equals(retirementTypeList.get(2))){
-                savingsType = "IRA";
-            } else if (retirementType.getValue().equals(retirementTypeList.get(3))){
-                savingsType = "Roth IRA";
-            } else if (retirementType.getValue().equals(retirementTypeList.get(4))){
-                savingsType = "Solo 401(k)";
-            } else if (retirementType.getValue().equals(retirementTypeList.get(5))){
-                savingsType = "None";
-            }
-            
-            paycheck.setCheckAmount(Double.parseDouble(incomeTextField.getText()));
-            paycheck.setPayDay(lastCheckPicker.getValue());
-            paycheck.setFrequency(frequency);
-            paycheck.nextPaychecks(lastCheckPicker.getValue(), frequency);
-            theBudgetOverview.setThePaycheck(paycheck);
-            theBudgetOverview.setDOB(dobPicker.getValue());
-            theBudgetOverview.setTheLastPayDate(lastCheckPicker.getValue());
-            theBudgetOverview.setAccountType(savingsType);
-            theBudgetOverviewCntl.setBudgetOverview(theBudgetOverview);
-            theBudgetOverviewCntl.updateCategoryUI();
-            theBudgetOverviewCntl.closePreferences();
-            
         } catch (Exception e){
             e.printStackTrace();
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -123,7 +132,7 @@ public class UserPreferencesUIController implements Initializable {
             alert.setHeaderText("Please enter all fields");
             alert.setContentText("Make sure to properly enter all your information");
             alert.showAndWait();
-        }
+         }
     }
     
     public double getMonthlyIncome(){
