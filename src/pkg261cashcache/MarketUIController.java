@@ -16,9 +16,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import yahoofinance.YahooFinance;
 
 /**
@@ -59,6 +64,9 @@ public class MarketUIController implements Initializable {
         stockList = theBudgetOverview.getTheStockList();
         initTable();
         initRightSide();
+        if(stockList.size() > 0){
+            handleRefreshStockList();
+        }
         
         
     }
@@ -95,10 +103,11 @@ public class MarketUIController implements Initializable {
             // Traditional way to get the response value.
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()){
-                stockList.add(new StockItem(YahooFinance.get(result.get()).getSymbol()));
+                stockList.add(new StockItem(result.get()));
             }
             theBudgetOverview.setTheStockList(stockList);
             initTable();
+            //colorizeTable();
         }catch(Exception e){
             
         }
@@ -110,7 +119,32 @@ public class MarketUIController implements Initializable {
         initTable();
     }
     
+    @FXML private void handleRefreshStockList(){
+        for(int i = 0; i < stockList.size(); i++){
+            stockList.set(i, new StockItem(stockList.get(i).getSymbol()));
+        }
+        theBudgetOverview.setTheStockList(stockList);
+        initTable();
+    }
     
+    
+    public void colorizeTable(){
+          percentageChange.setCellFactory(column -> {
+            return new TableCell<StockItem, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        
+                        TableRow<StockItem> currentRow = getTableRow();
+                        
+                        if(item.compareTo("0") > 0){
+                            currentRow.setStyle("-fx-text-color: rgba(137, 158, 96, 0.7);");                            
+                        }
+                        
+                    }
+                };
+            });
+    }
     
     
     public void initRightSide(){
@@ -118,7 +152,7 @@ public class MarketUIController implements Initializable {
         ArrayList<Category> categories = theBudgetOverview.getTheCategoryList().getTheListofCategories();
         double savings = 0.0;
         LocalDate startAge = theBudgetOverview.getDOB();
-        System.out.println(startAge.getYear());
+        //System.out.println(startAge.getYear());
         for(int i =0; i < 100; i++){
                 years.add(i);
             }
