@@ -80,8 +80,20 @@ public class UserPreferencesUIController implements Initializable {
     
     @FXML
     public void handleSave(){
+        
+        // Creates a temporary allowance to test if it is greater than the category allowance
+        double tempAllowance = Double.parseDouble(incomeTextField.getText());
+        
+        if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(0))){
+            tempAllowance = tempAllowance * 4;
+        }  else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(1))){
+            tempAllowance = tempAllowance * 2;
+        }
+        
         try{
-            if (Double.parseDouble(incomeTextField.getText()) > theBudgetOverviewCntl.getMonthlyIncome()) {
+            double expenses = Math.abs(theBudgetOverviewCntl.calculateRemainingFunds() - theBudgetOverviewCntl.getMonthlyIncome());
+       
+            if (tempAllowance >= expenses) {
                 if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(0))){
                     frequency = 0;
                 } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(2))){
@@ -89,7 +101,6 @@ public class UserPreferencesUIController implements Initializable {
                 } else if (paycheckFrequency.getValue().equals(paycheckFrequencyList.get(1))){
                     frequency = 1;
                 }
-
 
                 if (retirementType.getValue().equals(retirementTypeList.get(0))){
                     savingsType = "401(k)";
@@ -120,8 +131,8 @@ public class UserPreferencesUIController implements Initializable {
             } else {
                 Alert payAlert = new Alert(AlertType.INFORMATION);
                 payAlert.setTitle("Incorrect Input");
-                payAlert.setHeaderText("Paycheck amount error");
-                payAlert.setContentText("Make sure that your paycheck remains larger than your total expenses");
+                payAlert.setHeaderText("Paycheck must be greater than total expenses.");
+                payAlert.setContentText("Please adjust the allowance of your categories if needed.");
                 payAlert.showAndWait();
             
             }
