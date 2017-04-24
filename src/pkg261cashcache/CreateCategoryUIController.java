@@ -9,9 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -22,6 +19,9 @@ import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
+ * 
+ * 
+ * When the user creates create a category, this controller is instantiated. 
  *
  * @author Phil
  */
@@ -29,6 +29,7 @@ public class CreateCategoryUIController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * 
      */
     
     private BudgetOverviewUIController theBudgetOverviewCntl;

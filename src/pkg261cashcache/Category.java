@@ -6,10 +6,7 @@
 package pkg261cashcache;
 
 import java.io.Serializable;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -17,6 +14,14 @@ import javafx.beans.value.ObservableValue;
 /**
  *
  * @author Phil
+ * 
+ * This class represents an expense category. Ex. Mortgage, Rent, Groceries, etc. 
+ * Every category is categorized as flexible spending, fixed cost, or savings. 
+ *
+  
+ * 
+ * 
+ * 
  */
 public class Category implements Serializable {
     

@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
-import yahoofinance.histquotes.Interval;
 
 /**
  *
  * @author Phil
+ * 
+ * Stock from the YahooFinance API is not serializable. This class is intended as a workaround that problem.
+ * 
  */
 public class StockItem implements Serializable{
     

@@ -6,9 +6,7 @@
 package pkg261cashcache;
 
 import java.net.URL;
-import static java.sql.Date.valueOf;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +21,9 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
+ * Instantiated when the user presses the Preferences button. 
+ * It is used to gather financial information from the user. 
+ * 
  * @author Phil
  */
 public class UserPreferencesUIController implements Initializable {

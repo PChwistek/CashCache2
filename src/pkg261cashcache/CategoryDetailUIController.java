@@ -31,6 +31,10 @@ public class CategoryDetailUIController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * 
+     * Whenever a user clicks on a category from the table on the left, this controller is instantiated... 
+     * It allows users to set an allowance and shows recommended allocations 
+     * 
      */
     
     @FXML private Label theCategoryName;
@@ -73,8 +77,6 @@ public class CategoryDetailUIController implements Initializable {
         } else if (theBudgetOverviewCntl.calculateRemainingFunds() < 0) {
         
         }
-        
- 
         
         setRecommendedChart();
         setUserAllocationChart();
@@ -136,7 +138,7 @@ public class CategoryDetailUIController implements Initializable {
         }
     }
     
-    private void setUserAllocationChart(){ //user chart data
+    private void setUserAllocationChart(){ //user pie chart data
         ObservableList<Category> theListOfCategories = FXCollections.observableArrayList(theBudgetOverviewCntl.getTheBudgetOverview().getTheCategoryList().getTheListofCategories());
         double fixedCostAllowance = 0;
         double flexSpendingAllowance = 0;

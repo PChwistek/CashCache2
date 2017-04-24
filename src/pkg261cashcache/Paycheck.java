@@ -8,14 +8,16 @@ package pkg261cashcache;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+
 
 /**
  *
  * @author Phil
+ * 
+ * An instance of this class is added to the BudgetOverview when saving preferences. 
+ * Holds all information in regards to income.
+ * 
+ * 
  */
 public class Paycheck implements Serializable {
     

@@ -7,12 +7,13 @@ package pkg261cashcache;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  *
  * @author Phil
+ * 
+ * Pretty self-explanatory here. Holds the ArrayList that is shown on the left-hand table
+ * 
  */
 public class CategoryList implements Serializable{
     

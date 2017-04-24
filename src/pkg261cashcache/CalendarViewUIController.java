@@ -30,7 +30,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.Tooltip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -39,6 +38,11 @@ import javafx.util.Callback;
 /**
  * FXML Controller class
  *
+ * 
+ * This controller is instantiated when the user clicks on calendar. It is intended to serve as a 
+ * way for the user to log their expenses. 
+ * 
+ * 
  * @author Phil
  */
 public class CalendarViewUIController implements Initializable {
@@ -185,7 +189,7 @@ public class CalendarViewUIController implements Initializable {
     
     private void initCategoryTables(){
         
-        //Fixed Cost Table resize
+        //Fixed Cost Table resize and naming
         
         
         fixedCostCategoryCol.prefWidthProperty().bind(fixedCostTable.widthProperty().divide(3)); fixedCostCategoryCol.setText("Category");

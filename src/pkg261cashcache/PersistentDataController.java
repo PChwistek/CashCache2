@@ -7,6 +7,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
+/*
+
+This controller serialized the BudgetOverview and reads it back in. 
+
+
+
+*/
+
 public class PersistentDataController {
 
     private final String THE_SERIALIZED_DATA_FILE_NAME = "serializedData.ser";

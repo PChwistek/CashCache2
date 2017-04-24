@@ -21,15 +21,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-import javafx.util.Callback;
-import yahoofinance.YahooFinance;
+
 
 /**
  * FXML Controller class
  *
  * @author Phil
+ * 
+ * This class is instantiated when the Market button is pressed. 
+ * It calculates how much retirement savings from this month would be worth in the future.
+ * It also allows the user to add, delete, and view stocks/stock information. 
+ * 
+ * 
+ * 
  */
 public class MarketUIController implements Initializable {
 

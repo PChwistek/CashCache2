@@ -5,18 +5,19 @@
  */
 package pkg261cashcache;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
 
 /**
  *
  * @author Phil
+ * 
+ * This class serves as the data model for the entire application
+ * 
+ * 
  */
 public class BudgetOverview implements Serializable{
     

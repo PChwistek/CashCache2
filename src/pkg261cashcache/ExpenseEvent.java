@@ -7,7 +7,6 @@ package pkg261cashcache;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -16,6 +15,12 @@ import javafx.beans.value.ObservableValue;
 /**
  *
  * @author Philz zee Kill
+ * 
+ * This class holds information regarding a logged expense. For ex: a restaurant bill, an Amazon purchase, etc.
+ * These expenses are categorized under an existing expense category.
+ * Food, for instance, could include a specific visit to the grocery store.
+ * 
+ * 
  */
 public class ExpenseEvent implements Serializable {
     

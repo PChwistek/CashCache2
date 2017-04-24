@@ -27,6 +27,11 @@ public class CreateNewExpenseController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * 
+     * In the calendar view, under the accordion, whenever the user creates a new expense event, this 
+     * controller controls the menu to do so. 
+     * 
+     * 
      */
     
     private CalendarViewUIController theCalendarCntl;

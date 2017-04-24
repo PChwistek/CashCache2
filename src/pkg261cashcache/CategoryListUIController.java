@@ -7,12 +7,9 @@ package pkg261cashcache;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,6 +19,10 @@ import javafx.scene.control.TableView;
 /**
  * FXML Controller class
  *
+ * This class is embedded in the BudgetOverviewUIController. 
+ * It includes the table of categories, as well as the income remaining and monthly allowance calculations
+ * 
+ * 
  * @author Phil
  */
 public class CategoryListUIController implements Initializable {
