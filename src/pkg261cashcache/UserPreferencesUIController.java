@@ -49,7 +49,7 @@ public class UserPreferencesUIController implements Initializable {
     private Paycheck paycheck;
     private BudgetOverview theBudgetOverview;
     private double monthlyIncome = 0.0;
-    private int frequency = 0;
+    private int frequency = 0; // this is an index relating to the combobox, WEEKLY, BIWEEKLY, and MONTHLY, respectively
     private String savingsType;
         
     @Override
